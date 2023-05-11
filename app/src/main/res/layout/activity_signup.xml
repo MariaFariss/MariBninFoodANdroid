@@ -40,11 +40,13 @@ tools:context=".SignupActivity">
             android:layout_marginTop="20dp"
             android:background="@drawable/lavender_border"
             android:drawableLeft="@drawable/baseline_lock_24"
+            android:drawableRight="@drawable/baseline_remove_red_eye_24"
             android:drawablePadding="8dp"
             android:hint="Password"
             android:inputType="textPassword"
             android:padding="8dp"
-            android:textColor="@color/grey" />
+            android:textColor="@color/grey"
+            app:passwordToggleEnabled="true"/>
 
         <EditText
             android:id="@+id/signup_confirm"
@@ -53,11 +55,13 @@ tools:context=".SignupActivity">
             android:layout_marginTop="20dp"
             android:background="@drawable/lavender_border"
             android:drawableLeft="@drawable/baseline_password_24"
+            android:drawableRight="@drawable/baseline_remove_red_eye_24"
             android:drawablePadding="8dp"
             android:hint="Confirm Password"
             android:inputType="textPassword"
             android:padding="8dp"
-            android:textColor="@color/grey" />
+            android:textColor="@color/grey"
+            app:passwordToggleEnabled="true"/>
 
         <Button
             android:id="@+id/signup_button"

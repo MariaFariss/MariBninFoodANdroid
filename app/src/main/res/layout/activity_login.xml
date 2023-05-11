@@ -45,8 +45,10 @@
                     android:padding="8dp"
                     android:hint="Password"
                     android:drawableLeft="@drawable/baseline_lock_24"
+                    android:drawableRight="@drawable/baseline_remove_red_eye_24"
                     android:drawablePadding="8dp"
-                    android:textColor="@color/grey"/>
+                    android:textColor="@color/grey"
+                    app:passwordToggleEnabled="true"/>
 
 
                 <Button
