@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "142800095618",
+    "project_id": "maribninfood",
+    "storage_bucket": "maribninfood.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:142800095618:android:fbdc266dce61c52061a79b",
+        "android_client_info": {
+          "package_name": "com.example.maribninfood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "142800095618-n48t4viu00o04rlho5t09qvjcp1j2d3h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALI7L_vh39BDnzk9H3tuzd2cDIEE4RADM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "142800095618-n48t4viu00o04rlho5t09qvjcp1j2d3h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
