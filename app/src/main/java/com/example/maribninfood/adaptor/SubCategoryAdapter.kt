@@ -20,8 +20,9 @@ class SubCategoryAdapter(private val dataList: ArrayList<RecipeClass>): Recycler
 
     override fun onBindViewHolder(holder: ViewHolderClass, position: Int) {
         val currentItem = dataList[position]
-        holder.rvImage.setImageResource(currentItem.dataImage)
+//        holder.rvImage.setImageResource(currentItem.dataImage)
         holder.rvTitle.text = currentItem.dataTitle
+        holder.rvTitle.text = currentItem.dataImage
         holder.itemView.setOnClickListener{
             onItemClick?.invoke(currentItem)
         }

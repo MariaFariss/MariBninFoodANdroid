@@ -18,22 +18,33 @@ import com.example.maribninfood.adaptor.SubCategoryAdapter
 import com.example.maribninfood.databinding.FragmentHomeBinding
 import com.example.maribninfood.model.RecipeClass
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentChange
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreException
+import com.google.firebase.firestore.QuerySnapshot
 import java.util.Locale
+import com.google.firebase.firestore.EventListener
+
+
 
 class HomeFragment : Fragment() {
 
     private lateinit var recyclerViewMain: RecyclerView
     private lateinit var recyclerViewSub: RecyclerView
     private lateinit var dataList: ArrayList<RecipeClass>
-    lateinit var imageList:Array<Int>
-    lateinit var titleList:Array<String>
-    lateinit var descList: Array<String>
-    lateinit var detailImageList: Array<Int>
     private lateinit var myAdapterMain: MainCategoryAdapter
     private lateinit var myAdapterSub: SubCategoryAdapter
     private lateinit var searchView: SearchView
     private lateinit var searchList: ArrayList<RecipeClass>
+    private lateinit var db : FirebaseFirestore
+    companion object{
+        private var TAG = "HomeFragment"
+    }
 
+//    lateinit var imageList:Array<Int>
+//    lateinit var titleList:Array<String>
+//    lateinit var descList: Array<String>
+//    lateinit var detailImageList: Array<Int>
     private var _binding: FragmentHomeBinding? = null
 
     // This property is only valid between onCreateView and
@@ -49,38 +60,34 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-
-
-
-
-        imageList = arrayOf(
-            R.drawable.img,
-            R.drawable.img,
-            R.drawable.img,
-            R.drawable.img,
-            R.drawable.img,
-
-        )
-        titleList = arrayOf(
-            "ListView",
-            "CheckBox",
-            "ImageView",
-            "Toggle Switch",
-            "Date Picker")
-        descList = arrayOf(
-            getString(R.string.title_home),
-            getString(R.string.title_home),
-            getString(R.string.title_home),
-            getString(R.string.title_home),
-            getString(R.string.title_home)
-        )
-        detailImageList = arrayOf(
-            R.drawable.img,
-            R.drawable.img,
-            R.drawable.img,
-            R.drawable.img,
-            R.drawable.img
-        )
+//        imageList = arrayOf(
+//            R.drawable.img,
+//            R.drawable.img,
+//            R.drawable.img,
+//            R.drawable.img,
+//            R.drawable.img,
+//
+//        )
+//        titleList = arrayOf(
+//            "ListView",
+//            "CheckBox",
+//            "ImageView",
+//            "Toggle Switch",
+//            "Date Picker")
+//        descList = arrayOf(
+//            getString(R.string.title_home),
+//            getString(R.string.title_home),
+//            getString(R.string.title_home),
+//            getString(R.string.title_home),
+//            getString(R.string.title_home)
+//        )
+//        detailImageList = arrayOf(
+//            R.drawable.img,
+//            R.drawable.img,
+//            R.drawable.img,
+//            R.drawable.img,
+//            R.drawable.img
+//        )
         //binding pour les deux recyclerView et le search
         recyclerViewMain = binding.rvMainCategory
         recyclerViewSub = binding.rvSubCategory
@@ -93,7 +100,13 @@ class HomeFragment : Fragment() {
 
         dataList = arrayListOf<RecipeClass>()
         searchList = arrayListOf<RecipeClass>()
-        getData()
+
+        readFromFirestore("Recipe") { listData ->
+            // Handle listData
+            searchList.addAll(listData)
+            recyclerViewMain.adapter = MainCategoryAdapter(searchList)
+        }
+
         searchView.clearFocus()
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
@@ -152,13 +165,56 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-    private fun getData(){
-        for (i in imageList.indices){
-            val dataClass = RecipeClass(imageList[i], titleList[i], descList[i], detailImageList[i])
-            dataList.add(dataClass)
-        }
+   fun getData(){
         searchList.addAll(dataList)
         recyclerViewMain.adapter = MainCategoryAdapter(searchList)
     }
+//    private fun getData(){
+//        searchList.addAll(dataList)
+//        recyclerViewMain.adapter = MainCategoryAdapter(searchList)
+//        db = FirebaseFirestore.getInstance()
+//        db.collection("Recipe").
+//        addSnapshotListener(object : EventListener<QuerySnapshot>{
+//            override fun onEvent(value : QuerySnapshot?, error:FirebaseFirestoreException?){
+//                if(error != null){
+//                    Log.e("Firestore Error", error.message.toString())
+//                    return
+//                }
+//                for(dc : DocumentChange in value?.documentChanges!!){
+//                    if(dc.type == DocumentChange.Type.ADDED){
+//                        dataList.add(dc.document.toObject(RecipeClass::class.java))
+//                    }
+//                }
+//                myAdapterMain.notifyDataSetChanged()
+//                myAdapterSub.notifyDataSetChanged()
+//            }
+//        })
+//    }
+
+    fun readFromFirestore(collection: String, callback: (ArrayList<RecipeClass>) -> Unit) {
+        val listData = ArrayList<RecipeClass>()
+        FirebaseFirestore.getInstance().collection(collection)
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    listData.add(
+                        RecipeClass(
+                            document.data["dataImage"] as String,
+                            document.data["dataTitle"] as String,
+                            document.data["dataDesc"] as String
+                        )
+                    )
+                    Log.d(TAG,"listdatafor   "+listData)
+
+                }
+                Log.d(TAG,"listdata   "+listData)
+                callback(listData)
+            }
+            .addOnFailureListener { exception ->
+                Log.w(TAG, "Error getting documents.", exception)
+            }
+    }
+
+
+
 }

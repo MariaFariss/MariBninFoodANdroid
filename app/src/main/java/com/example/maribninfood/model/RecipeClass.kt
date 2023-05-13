@@ -2,22 +2,20 @@ package com.example.maribninfood.model
 
 import android.os.Parcel
 import android.os.Parcelable
-import com.example.maribninfood.dao.RecipeDao
-
-class RecipeClass (var dataImage:Int, var dataTitle:String, var dataDesc: String, var dataDetailImage: Int):
+class RecipeClass (var dataImage:String, var dataTitle:String, var dataDesc: String):
     Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readInt(),
         parcel.readString()!!,
         parcel.readString()!!,
-        parcel.readInt()
+        parcel.readString()!!
+//        parcel.readInt()
     ) {
     }
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(dataImage)
+        parcel.writeString(dataImage)
         parcel.writeString(dataTitle)
         parcel.writeString(dataDesc)
-        parcel.writeInt(dataDetailImage)
+//        parcel.writeInt(dataDetailImage)
     }
     override fun describeContents(): Int {
         return 0
