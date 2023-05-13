@@ -70,8 +70,10 @@ class HomeFragment : Fragment() {
 
         readFromFirestore("Recipe") { listData ->
             // Handle listData
+            dataList=listData
             searchList.addAll(listData)
             recyclerViewMain.adapter = MainCategoryAdapter(searchList)
+            recyclerViewSub.adapter = SubCategoryAdapter(searchList)
         }
 
         searchView.clearFocus()
