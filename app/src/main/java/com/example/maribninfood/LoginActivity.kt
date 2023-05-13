@@ -4,7 +4,10 @@ import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.util.Patterns
+import android.view.MotionEvent
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -57,6 +60,26 @@ class LoginActivity : AppCompatActivity() {
         binding.signupRedirectText.setOnClickListener {
             val signupIntent = Intent(this, SignupActivity::class.java)
             startActivity(signupIntent)
+        }
+
+        val passwordEditText = findViewById<EditText>(R.id.login_password)
+
+        passwordEditText.setOnTouchListener { v, event ->
+            if (event.action == MotionEvent.ACTION_UP) {
+                if (event.rawX >= (passwordEditText.right - passwordEditText.compoundDrawables[2].bounds.width())) {
+                    if (passwordEditText.transformationMethod == PasswordTransformationMethod.getInstance()) {
+                        // Afficher le mot de passe en texte clair
+                        passwordEditText.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                        passwordEditText.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_lock_24, 0, R.drawable.baseline_remove_red_eye_24, 0)
+                    } else {
+                        // Masquer le mot de passe
+                        passwordEditText.transformationMethod = PasswordTransformationMethod.getInstance()
+                        passwordEditText.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_lock_24, 0, R.drawable.baseline_visibility_off_24, 0)
+                    }
+                    return@setOnTouchListener true
+                }
+            }
+            false
         }
     }
     //Outside onCreate

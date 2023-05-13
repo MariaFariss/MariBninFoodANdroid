@@ -54,8 +54,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_10dp"
                 android:orientation="horizontal"
-                tools:itemCount="1"/>
-<!--                tools:listitem="@layout/item_rv_main_category" />-->
+                tools:itemCount="1"
+                tools:listitem="@layout/item_rv_main_category" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -73,8 +73,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_10dp"
                 android:orientation="horizontal"
-                tools:itemCount="1"/>
-<!--                tools:listitem="@layout/item_rv_sub_category"/>-->
+                tools:itemCount="1"
+                tools:listitem="@layout/item_rv_sub_category"/>
 
 
         </LinearLayout>
