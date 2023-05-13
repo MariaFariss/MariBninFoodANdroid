@@ -1,11 +1,15 @@
 package com.example.maribninfood.adaptor
 
+import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.maribninfood.App
 import com.example.maribninfood.R
 import com.example.maribninfood.model.RecipeClass
 
@@ -21,12 +25,16 @@ class MainCategoryAdapter(private val dataList: ArrayList<RecipeClass>): Recycle
 
     override fun onBindViewHolder(holder: ViewHolderClass, position: Int) {
         val currentItem = dataList[position]
+        Log.d("main" ,""+ currentItem.dataImage)
+        Glide.with(App.applicationContext)
+            .load(Uri.parse(currentItem.dataImage))
+            .into(holder.rvImage)
 //        holder.rvImage.setImageResource(currentItem.dataImage)
         holder.rvTitle.text = currentItem.dataTitle
-        holder.rvTitle.text = currentItem.dataImage
         holder.itemView.setOnClickListener{
             onItemClick?.invoke(currentItem)
         }
+
     }
 
     override fun getItemCount(): Int {

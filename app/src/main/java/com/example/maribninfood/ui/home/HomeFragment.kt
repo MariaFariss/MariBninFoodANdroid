@@ -38,13 +38,8 @@ class HomeFragment : Fragment() {
     private lateinit var searchList: ArrayList<RecipeClass>
     private lateinit var db : FirebaseFirestore
     companion object{
-        private var TAG = "HomeFragment"
+        private const val TAG  = "HomeFragment"
     }
-
-//    lateinit var imageList:Array<Int>
-//    lateinit var titleList:Array<String>
-//    lateinit var descList: Array<String>
-//    lateinit var detailImageList: Array<Int>
     private var _binding: FragmentHomeBinding? = null
 
     // This property is only valid between onCreateView and
@@ -60,34 +55,6 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-//        imageList = arrayOf(
-//            R.drawable.img,
-//            R.drawable.img,
-//            R.drawable.img,
-//            R.drawable.img,
-//            R.drawable.img,
-//
-//        )
-//        titleList = arrayOf(
-//            "ListView",
-//            "CheckBox",
-//            "ImageView",
-//            "Toggle Switch",
-//            "Date Picker")
-//        descList = arrayOf(
-//            getString(R.string.title_home),
-//            getString(R.string.title_home),
-//            getString(R.string.title_home),
-//            getString(R.string.title_home),
-//            getString(R.string.title_home)
-//        )
-//        detailImageList = arrayOf(
-//            R.drawable.img,
-//            R.drawable.img,
-//            R.drawable.img,
-//            R.drawable.img,
-//            R.drawable.img
-//        )
         //binding pour les deux recyclerView et le search
         recyclerViewMain = binding.rvMainCategory
         recyclerViewSub = binding.rvSubCategory
@@ -108,7 +75,6 @@ class HomeFragment : Fragment() {
         }
 
         searchView.clearFocus()
-
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 searchView.clearFocus()
@@ -165,30 +131,9 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-   fun getData(){
-        searchList.addAll(dataList)
-        recyclerViewMain.adapter = MainCategoryAdapter(searchList)
-    }
-//    private fun getData(){
+//   fun getData(){
 //        searchList.addAll(dataList)
 //        recyclerViewMain.adapter = MainCategoryAdapter(searchList)
-//        db = FirebaseFirestore.getInstance()
-//        db.collection("Recipe").
-//        addSnapshotListener(object : EventListener<QuerySnapshot>{
-//            override fun onEvent(value : QuerySnapshot?, error:FirebaseFirestoreException?){
-//                if(error != null){
-//                    Log.e("Firestore Error", error.message.toString())
-//                    return
-//                }
-//                for(dc : DocumentChange in value?.documentChanges!!){
-//                    if(dc.type == DocumentChange.Type.ADDED){
-//                        dataList.add(dc.document.toObject(RecipeClass::class.java))
-//                    }
-//                }
-//                myAdapterMain.notifyDataSetChanged()
-//                myAdapterSub.notifyDataSetChanged()
-//            }
-//        })
 //    }
 
     fun readFromFirestore(collection: String, callback: (ArrayList<RecipeClass>) -> Unit) {
@@ -214,7 +159,4 @@ class HomeFragment : Fragment() {
                 Log.w(TAG, "Error getting documents.", exception)
             }
     }
-
-
-
 }
