@@ -8,15 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 //import androidx.appcompat.widget.SearchView
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.maribninfood.DetailActivity
 import com.example.maribninfood.R
 import com.example.maribninfood.adaptor.MainCategoryAdapter
-import com.example.maribninfood.dao.RecipeDao
+import com.example.maribninfood.adaptor.SubCategoryAdapter
 import com.example.maribninfood.databinding.FragmentHomeBinding
 import com.example.maribninfood.model.RecipeClass
 import com.google.firebase.auth.FirebaseAuth
@@ -24,13 +22,15 @@ import java.util.Locale
 
 class HomeFragment : Fragment() {
 
-    private lateinit var recyclerView: RecyclerView
+    private lateinit var recyclerViewMain: RecyclerView
+    private lateinit var recyclerViewSub: RecyclerView
     private lateinit var dataList: ArrayList<RecipeClass>
     lateinit var imageList:Array<Int>
     lateinit var titleList:Array<String>
     lateinit var descList: Array<String>
     lateinit var detailImageList: Array<Int>
-    private lateinit var myAdapter: MainCategoryAdapter
+    private lateinit var myAdapterMain: MainCategoryAdapter
+    private lateinit var myAdapterSub: SubCategoryAdapter
     private lateinit var searchView: SearchView
     private lateinit var searchList: ArrayList<RecipeClass>
 
@@ -81,10 +81,16 @@ class HomeFragment : Fragment() {
             R.drawable.img,
             R.drawable.img
         )
-        recyclerView = binding.rvMainCategory
+        //binding pour les deux recyclerView et le search
+        recyclerViewMain = binding.rvMainCategory
+        recyclerViewSub = binding.rvSubCategory
         searchView = binding.searchView
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.setHasFixedSize(true)
+
+        recyclerViewMain.layoutManager = LinearLayoutManager(context)
+        recyclerViewMain.setHasFixedSize(true)
+        recyclerViewSub.layoutManager = LinearLayoutManager(context)
+        recyclerViewSub.setHasFixedSize(true)
+
         dataList = arrayListOf<RecipeClass>()
         searchList = arrayListOf<RecipeClass>()
         getData()
@@ -104,25 +110,34 @@ class HomeFragment : Fragment() {
                             searchList.add(it)
                         }
                     }
-                    recyclerView.adapter!!.notifyDataSetChanged()
+                    recyclerViewMain.adapter!!.notifyDataSetChanged()
                 } else {
                     searchList.clear()
                     searchList.addAll(dataList)
-                    recyclerView.adapter!!.notifyDataSetChanged()
+                    recyclerViewMain.adapter!!.notifyDataSetChanged()
                 }
                 return false
             }
         })
 
 
-        myAdapter = MainCategoryAdapter(searchList)
-        recyclerView.adapter = myAdapter
+        myAdapterMain = MainCategoryAdapter(searchList)
+        recyclerViewMain.adapter = myAdapterMain
 
-        myAdapter.onItemClick = {
+        myAdapterMain.onItemClick = {
             val intent = Intent(context, DetailActivity::class.java)
             intent.putExtra("android", it)
             startActivity(intent)
             Log.d("home", "detaileddd")
+        }
+
+        myAdapterSub = SubCategoryAdapter(searchList)
+        recyclerViewSub.adapter = myAdapterSub
+        myAdapterSub.onItemClick = {
+            val intent = Intent(context, DetailActivity::class.java)
+            intent.putExtra("android", it)
+            startActivity(intent)
+            Log.d("home", "detaileddd sub")
         }
 
         val user = FirebaseAuth.getInstance().currentUser
@@ -144,6 +159,6 @@ class HomeFragment : Fragment() {
             dataList.add(dataClass)
         }
         searchList.addAll(dataList)
-        recyclerView.adapter = MainCategoryAdapter(searchList)
+        recyclerViewMain.adapter = MainCategoryAdapter(searchList)
     }
 }
