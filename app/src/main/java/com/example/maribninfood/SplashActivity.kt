@@ -6,7 +6,7 @@ import android.content.Intent
 import android.os.Handler
 
 class SplashActivity : AppCompatActivity() {
-    private val SPLASH_DELAY: Long = 3000 //3 seconds
+    private val SPLASH_DELAY: Long = 1000 //1 seconds
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
