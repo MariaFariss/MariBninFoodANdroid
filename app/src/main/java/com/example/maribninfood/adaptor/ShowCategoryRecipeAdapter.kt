@@ -1,4 +1,5 @@
 package com.example.maribninfood.adaptor
+
 import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,27 +14,27 @@ import com.example.maribninfood.R
 import com.example.maribninfood.model.Categories
 import com.example.maribninfood.model.RecipeClass
 
-
-class SubCategoryAdapter(private val dataList: ArrayList<Categories>): RecyclerView.Adapter<SubCategoryAdapter.ViewHolderClass>(){
-
-    var onItemClick: ((Categories) -> Unit)? = null
+class ShowCategoryRecipeAdapter(private val dataList: ArrayList<RecipeClass>): RecyclerView.Adapter<ShowCategoryRecipeAdapter.ViewHolderClass>() {
+    var onItemClick: ((RecipeClass) -> Unit)? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderClass {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_rv_sub_category, parent, false)
         return ViewHolderClass(itemView)
     }
 
+
     override fun onBindViewHolder(holder: ViewHolderClass, position: Int) {
         val currentItem = dataList[position]
-        ////pour l'image/////
+        Log.d("main" ,""+ currentItem.dataImage)
         Glide.with(App.applicationContext)
-            .load(Uri.parse(currentItem.image))
+            .load(Uri.parse(currentItem.dataImage))
             .into(holder.rvImage)
-        holder.rvTitle.text = currentItem.type
+//        holder.rvImage.setImageResource(currentItem.dataImage)
+        holder.rvTitle.text = currentItem.dataTitle
         holder.itemView.setOnClickListener{
             onItemClick?.invoke(currentItem)
         }
-    }
 
+    }
     override fun getItemCount(): Int {
         return dataList.size
     }
@@ -42,5 +43,4 @@ class SubCategoryAdapter(private val dataList: ArrayList<Categories>): RecyclerV
         val rvImage: ImageView = itemView.findViewById(R.id.img_dish)
         val rvTitle: TextView = itemView.findViewById(R.id.tv_dish_name)
     }
-
 }

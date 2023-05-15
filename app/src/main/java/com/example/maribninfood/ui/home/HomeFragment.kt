@@ -11,30 +11,27 @@ import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.maribninfood.CategoryDetail
 import com.example.maribninfood.DetailActivity
-import com.example.maribninfood.R
 import com.example.maribninfood.adaptor.MainCategoryAdapter
 import com.example.maribninfood.adaptor.SubCategoryAdapter
+import com.example.maribninfood.dao.CategoryDao
+import com.example.maribninfood.dao.RecipeDao
 import com.example.maribninfood.databinding.FragmentHomeBinding
 import com.example.maribninfood.model.RecipeClass
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.FirebaseFirestoreException
-import com.google.firebase.firestore.QuerySnapshot
 import java.util.Locale
-import com.google.firebase.firestore.EventListener
 
 class HomeFragment : Fragment() {
 
-    private lateinit var recyclerViewMain: RecyclerView
-    private lateinit var recyclerViewSub: RecyclerView
+    private lateinit var recyclerViewNewRecipe: RecyclerView
+    private lateinit var recyclerViewCategory: RecyclerView
     private lateinit var dataList: ArrayList<RecipeClass>
-    private lateinit var myAdapterMain: MainCategoryAdapter
-    private lateinit var myAdapterSub: SubCategoryAdapter
+    private lateinit var myAdapterNewRecipe: MainCategoryAdapter
+    private lateinit var myAdapterCategory: SubCategoryAdapter
     private lateinit var searchView: SearchView
     private lateinit var searchList: ArrayList<RecipeClass>
-    private lateinit var db : FirebaseFirestore
     companion object{
         private const val TAG  = "HomeFragment"
     }
@@ -54,36 +51,47 @@ class HomeFragment : Fragment() {
         val root: View = binding.root
 
         //binding pour les deux recyclerView et le search et les vues dans le xml
-        recyclerViewMain = binding.rvMainCategory
-       recyclerViewSub = binding.rvSubCategory
+        recyclerViewNewRecipe = binding.rvMainCategory
+        recyclerViewCategory = binding.rvSubCategory
         searchView = binding.searchView
         //on indique la forme dans laquelle on affichera notre recylcerview
-        recyclerViewMain.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
-        recyclerViewMain.setHasFixedSize(true)
-        recyclerViewSub.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
-        recyclerViewSub.setHasFixedSize(true)
+        recyclerViewNewRecipe.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+        recyclerViewNewRecipe.setHasFixedSize(true)
+        recyclerViewCategory.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+        recyclerViewCategory.setHasFixedSize(true)
 
         dataList = arrayListOf<RecipeClass>()
         searchList = arrayListOf<RecipeClass>()
 
-        readFromFirestore("Recipe") { listData ->
+    /////////////new recipes/////////////////
+        RecipeDao.getNewRecipe("Recipe") { listData ->
             dataList=listData
             searchList.addAll(listData)
             //associer le recyclerview avec son adapter
-//            recyclerViewSub.adapter = SubCategoryAdapter(searchList)
-
 //            creer un adpeter en lui passant les datas en parametter
-            myAdapterMain = MainCategoryAdapter(searchList)
-            recyclerViewMain.adapter = myAdapterMain
+            myAdapterNewRecipe = MainCategoryAdapter(searchList)
+            recyclerViewNewRecipe.adapter = myAdapterNewRecipe
             //transformer les datas d'une activité a une autre
-            myAdapterMain.onItemClick = {
+            myAdapterNewRecipe.onItemClick = {
                 val intent = Intent(context, DetailActivity::class.java)
-                intent.putExtra("android", it)
+                intent.putExtra("android", it.id)
                 startActivity(intent)
                 Log.d("home", "detaileddd")
             }
         }
 
+        ///////////////categories//////////////
+        CategoryDao.getCategories("Categories"){
+            myAdapterCategory = SubCategoryAdapter(it)
+            recyclerViewCategory.adapter = myAdapterCategory
+            myAdapterCategory.onItemClick = {
+                val intent = Intent(context, CategoryDetail::class.java)
+                intent.putExtra("category", it.documentReference)
+                startActivity(intent)
+                Log.d("home", "detaileddd sub")
+            }
+        }
+    ////////////pour le search /////////////
         searchView.clearFocus()
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -99,31 +107,16 @@ class HomeFragment : Fragment() {
                             searchList.add(it)
                         }
                     }
-                    recyclerViewMain.adapter!!.notifyDataSetChanged()
+                    recyclerViewNewRecipe.adapter!!.notifyDataSetChanged()
                 } else {
                     searchList.clear()
                     searchList.addAll(dataList)
-                    recyclerViewMain.adapter!!.notifyDataSetChanged()
+                    Log.d(TAG," ////////////////////<= " + recyclerViewNewRecipe.adapter)
+                    recyclerViewNewRecipe.adapter!!.notifyDataSetChanged()
                 }
                 return false
             }
         })
-
-
-        myAdapterSub = SubCategoryAdapter(searchList)
-        recyclerViewSub.adapter = myAdapterSub
-        myAdapterSub.onItemClick = {
-            val intent = Intent(context, DetailActivity::class.java)
-            intent.putExtra("android", it)
-            startActivity(intent)
-            Log.d("home", "detaileddd sub")
-        }
-
-        val user = FirebaseAuth.getInstance().currentUser
-        val displayName = user?.displayName
-        if (displayName != null) {
-            Log.d("test", displayName)
-        }
         return root
     }
 
@@ -131,33 +124,5 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-//   fun getData(){
-//        searchList.addAll(dataList)
-//        recyclerViewMain.adapter = MainCategoryAdapter(searchList)
-//    }
 
-    fun readFromFirestore(collection: String, callback: (ArrayList<RecipeClass>) -> Unit) {
-        val listData = ArrayList<RecipeClass>()
-        FirebaseFirestore.getInstance().collection(collection)
-            .get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    listData.add(
-                        RecipeClass(
-                            document.data["dataImage"] as String,
-                            document.data["dataTitle"] as String,
-                            document.data["dataDesc"] as String,
-                            document.data["newRecipes"] as Boolean
-                        )
-                    )
-                    Log.d(TAG,"listdatafor   "+listData)
-
-                }
-                Log.d(TAG,"listdata   "+listData)
-                callback(listData)
-            }
-            .addOnFailureListener { exception ->
-                Log.w(TAG, "Error getting documents.", exception)
-            }
-    }
 }

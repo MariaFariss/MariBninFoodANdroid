@@ -1,5 +1,6 @@
 package com.example.maribninfood.model
+import com.google.firebase.firestore.DocumentReference
 
-//class Categories {
-//    lunchRecipe
-//}
+data class Categories(var type : String, var documentReference : String, var image : String) {
+
+}

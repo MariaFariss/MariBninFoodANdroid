@@ -2,13 +2,15 @@ package com.example.maribninfood.model
 
 import android.os.Parcel
 import android.os.Parcelable
-class RecipeClass (var dataImage:String, var dataTitle:String, var dataDesc: String, var newRecipes : Boolean ):
+class RecipeClass (var id: String,var dataImage:String, var dataTitle:String, var dataDesc: String, var newRecipes : Boolean, var category : String ):
     Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!,
-        parcel.readByte() != 0.toByte()  // Read a byte and convert it to a Boolean
+        parcel.readString()!!,
+        parcel.readByte() != 0.toByte(),
+        parcel.readString()!!
 //        parcel.readInt()
     ) {
     }
@@ -17,6 +19,7 @@ class RecipeClass (var dataImage:String, var dataTitle:String, var dataDesc: Str
         parcel.writeString(dataTitle)
         parcel.writeString(dataDesc)
         parcel.writeByte(if (newRecipes) 1 else 0)  // Write a byte representing the Boolean value
+        parcel.writeString(category)
 //        parcel.writeInt(dataDetailImage)
     }
     override fun describeContents(): Int {
