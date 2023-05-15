@@ -36,7 +36,6 @@ class MainCategoryAdapter(private val dataList: ArrayList<RecipeClass>): Recycle
         }
 
     }
-
     override fun getItemCount(): Int {
         return dataList.size
     }

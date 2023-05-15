@@ -25,8 +25,6 @@ import com.google.firebase.firestore.QuerySnapshot
 import java.util.Locale
 import com.google.firebase.firestore.EventListener
 
-
-
 class HomeFragment : Fragment() {
 
     private lateinit var recyclerViewMain: RecyclerView
@@ -55,25 +53,35 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        //binding pour les deux recyclerView et le search
+        //binding pour les deux recyclerView et le search et les vues dans le xml
         recyclerViewMain = binding.rvMainCategory
-        recyclerViewSub = binding.rvSubCategory
+       recyclerViewSub = binding.rvSubCategory
         searchView = binding.searchView
-
-        recyclerViewMain.layoutManager = LinearLayoutManager(context)
+        //on indique la forme dans laquelle on affichera notre recylcerview
+        recyclerViewMain.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
         recyclerViewMain.setHasFixedSize(true)
-        recyclerViewSub.layoutManager = LinearLayoutManager(context)
+        recyclerViewSub.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
         recyclerViewSub.setHasFixedSize(true)
 
         dataList = arrayListOf<RecipeClass>()
         searchList = arrayListOf<RecipeClass>()
 
         readFromFirestore("Recipe") { listData ->
-            // Handle listData
             dataList=listData
             searchList.addAll(listData)
-            recyclerViewMain.adapter = MainCategoryAdapter(searchList)
-            recyclerViewSub.adapter = SubCategoryAdapter(searchList)
+            //associer le recyclerview avec son adapter
+//            recyclerViewSub.adapter = SubCategoryAdapter(searchList)
+
+//            creer un adpeter en lui passant les datas en parametter
+            myAdapterMain = MainCategoryAdapter(searchList)
+            recyclerViewMain.adapter = myAdapterMain
+            //transformer les datas d'une activité a une autre
+            myAdapterMain.onItemClick = {
+                val intent = Intent(context, DetailActivity::class.java)
+                intent.putExtra("android", it)
+                startActivity(intent)
+                Log.d("home", "detaileddd")
+            }
         }
 
         searchView.clearFocus()
@@ -101,16 +109,6 @@ class HomeFragment : Fragment() {
             }
         })
 
-
-        myAdapterMain = MainCategoryAdapter(searchList)
-        recyclerViewMain.adapter = myAdapterMain
-
-        myAdapterMain.onItemClick = {
-            val intent = Intent(context, DetailActivity::class.java)
-            intent.putExtra("android", it)
-            startActivity(intent)
-            Log.d("home", "detaileddd")
-        }
 
         myAdapterSub = SubCategoryAdapter(searchList)
         recyclerViewSub.adapter = myAdapterSub
@@ -148,7 +146,8 @@ class HomeFragment : Fragment() {
                         RecipeClass(
                             document.data["dataImage"] as String,
                             document.data["dataTitle"] as String,
-                            document.data["dataDesc"] as String
+                            document.data["dataDesc"] as String,
+                            document.data["newRecipes"] as Boolean
                         )
                     )
                     Log.d(TAG,"listdatafor   "+listData)
