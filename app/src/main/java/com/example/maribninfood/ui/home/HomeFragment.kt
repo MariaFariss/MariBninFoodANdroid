@@ -32,6 +32,8 @@ class HomeFragment : Fragment() {
     private lateinit var myAdapterCategory: SubCategoryAdapter
     private lateinit var searchView: SearchView
     private lateinit var searchList: ArrayList<RecipeClass>
+    private var isRestoringViewState = false //pour recuperer la vue lorsque'on clique le dessu
+
     companion object{
         private const val TAG  = "HomeFragment"
     }
@@ -99,20 +101,39 @@ class HomeFragment : Fragment() {
                 return true
             }
             override fun onQueryTextChange(newText: String?): Boolean {
-                searchList.clear()
-                val searchText = newText!!.toLowerCase(Locale.getDefault())
-                if (searchText.isNotEmpty()){
-                    dataList.forEach{
-                        if (it.dataTitle.toLowerCase(Locale.getDefault()).contains(searchText)) {
-                            searchList.add(it)
-                        }
-                    }
-                    recyclerViewNewRecipe.adapter!!.notifyDataSetChanged()
-                } else {
+//                searchList.clear()
+//                val searchText = newText!!.toLowerCase(Locale.getDefault())
+//                if (searchText.isNotEmpty()){
+//                    dataList.forEach{
+//                        if (it.dataTitle.toLowerCase(Locale.getDefault()).contains(searchText)) {
+//                            searchList.add(it)
+//                        }
+//                    }
+//                    recyclerViewNewRecipe.adapter!!.notifyDataSetChanged()
+//                } else {
+//                    searchList.clear()
+//                    searchList.addAll(dataList)
+//                    recyclerViewNewRecipe.adapter!!.notifyDataSetChanged()
+//                }
+//                return false
+
+
+
+
+                if (!isRestoringViewState) {
                     searchList.clear()
-                    searchList.addAll(dataList)
-                    Log.d(TAG," ////////////////////<= " + recyclerViewNewRecipe.adapter)
-                    recyclerViewNewRecipe.adapter!!.notifyDataSetChanged()
+                    val searchText = newText?.toLowerCase(Locale.getDefault()) ?: ""
+                    if (searchText.isNotEmpty()) {
+                        dataList.forEach {
+                            if (it.dataTitle.toLowerCase(Locale.getDefault()).contains(searchText)) {
+                                searchList.add(it)
+                            }
+                        }
+                        recyclerViewNewRecipe.adapter?.notifyDataSetChanged()
+                    } else {
+                        searchList.addAll(dataList)
+                        recyclerViewNewRecipe.adapter?.notifyDataSetChanged()
+                    }
                 }
                 return false
             }
@@ -124,5 +145,18 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+
+    //restore the home view
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        isRestoringViewState = true
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        isRestoringViewState = false
+    }
+
 
 }

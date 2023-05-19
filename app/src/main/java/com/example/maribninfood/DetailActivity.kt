@@ -64,7 +64,6 @@ class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
-        Log.d("somthing ", " redd" )
         val ref = intent.getStringExtra("android")
         RecipeDao.getRecipeByRef(ref!!) { ref->
             val detailTitle: TextView = findViewById(R.id.detailTitle)
@@ -72,13 +71,10 @@ class DetailActivity : AppCompatActivity() {
             val image : ImageView = findViewById(R.id.detailImage)
 
             detailTitle.text = ref.dataTitle
-//            detailTitle.text = "getData.dataTitle"
-//            detailDesc.text = ref.dataDesc
-            //detailDesc.text = "getData.dataDesc"
+            detailDesc.text = ref.dataDesc
             Glide.with(App.applicationContext)
                 .load(Uri.parse(ref.dataImage))
                 .into(image)
-//                detailImage.setImageResource(getData.dataDetailImage)
         }
 
 
