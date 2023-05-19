@@ -1,0 +1,93 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Image du profil -->
+    <ImageView
+        android:id="@+id/profile_image"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/account"
+        android:scaleType="centerCrop"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
+
+    <!-- Bouton "Back to Home" -->
+    <Button
+        android:id="@+id/btn_back_to_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back to Home"
+        android:layout_below="@id/profile_image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
+
+    <!-- Informations sur le profil -->
+    <TextView
+        android:id="@+id/tv_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Username: John Doe"
+        android:textSize="18sp"
+        android:layout_below="@id/btn_back_to_home"
+        android:layout_marginTop="16dp"
+        android:layout_alignStart="@id/btn_back_to_home" />
+
+    <TextView
+        android:id="@+id/tv_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email: john.doe@example.com"
+        android:textSize="18sp"
+        android:layout_below="@id/tv_username"
+        android:layout_marginTop="8dp"
+        android:layout_alignStart="@id/tv_username" />
+
+    <LinearLayout
+        android:id="@+id/buttons_layout"
+        android:orientation = "horizontal"
+        android:gravity = "center_horizontal"
+        android:layout_below = "@+id/tv_email"
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content">
+
+        <Button
+            android:id="@+id/btn_change_password"
+            android:textSize = "12sp"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:textAllCaps = "false"
+            android:textColor = "@color/black"
+            android:textStyle = "bold"
+            android:typeface = "sans"
+            android:minWidth = "0dp"
+            android:minHeight = "0dp"
+            android:elevation = "0dp"
+            android:textAlignment = "center"
+            android:drawableLeft="@drawable/baseline_key_24"
+            android:text = "Change Password"/>
+
+        <Space
+            android:id="@+id/space_between_buttons"
+            android:layout_width = "@dimen/_10dp"
+            android:layout_height = "@dimen/_10dp"/>
+
+        <Button
+            android:id="@+id/deconnexion"
+            android:textSize = "12sp"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:textAllCaps = "false"
+            android:textColor = "@color/black"
+            android:textStyle = "bold"
+            android:typeface = "sans"
+            android:minWidth = "0dp"
+            android:minHeight = "0dp"
+            android:elevation = "0dp"
+            android:textAlignment = "center"
+            android:drawableLeft="@drawable/baseline_logout_24"
+            android:text = "Sign out"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
