@@ -48,15 +48,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.WindowCompat
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import com.bumptech.glide.Glide
 import com.example.maribninfood.dao.CategoryDao
 import com.example.maribninfood.dao.RecipeDao
-import com.example.maribninfood.databinding.ActivityDetailBinding
 import com.example.maribninfood.model.RecipeClass
 
 class DetailActivity : AppCompatActivity() {

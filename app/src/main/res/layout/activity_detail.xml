@@ -52,9 +52,8 @@
                 android:paddingBottom="8dp"
                 android:layout_margin="@dimen/_10dp"
                 android:layout_gravity="start"
-                android:background="@drawable/img"
-                android:id="@+id/imgToolbarBtnBack"/>
-<!--                android:src="@drawable/ic_back"-->
+                android:src="@drawable/img"
+                 android:id="@+id/imgToolbarBtnBack"/>
 
             <ImageButton
                 android:layout_width="wrap_content"

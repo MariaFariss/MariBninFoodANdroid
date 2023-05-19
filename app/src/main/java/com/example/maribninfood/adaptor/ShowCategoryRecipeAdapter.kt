@@ -17,7 +17,7 @@ import com.example.maribninfood.model.RecipeClass
 class ShowCategoryRecipeAdapter(private val dataList: ArrayList<RecipeClass>): RecyclerView.Adapter<ShowCategoryRecipeAdapter.ViewHolderClass>() {
     var onItemClick: ((RecipeClass) -> Unit)? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderClass {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_rv_sub_category, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.category_detail_card, parent, false)
         return ViewHolderClass(itemView)
     }
 
@@ -30,7 +30,7 @@ class ShowCategoryRecipeAdapter(private val dataList: ArrayList<RecipeClass>): R
             .into(holder.rvImage)
 //        holder.rvImage.setImageResource(currentItem.dataImage)
         holder.rvTitle.text = currentItem.dataTitle
-        holder.itemView.setOnClickListener{
+        holder.rvBoutton.setOnClickListener{
             onItemClick?.invoke(currentItem)
         }
 
@@ -42,5 +42,6 @@ class ShowCategoryRecipeAdapter(private val dataList: ArrayList<RecipeClass>): R
     class ViewHolderClass(itemView: View): RecyclerView.ViewHolder(itemView) {
         val rvImage: ImageView = itemView.findViewById(R.id.img_dish)
         val rvTitle: TextView = itemView.findViewById(R.id.tv_dish_name)
+        val rvBoutton: TextView = itemView.findViewById(R.id.btn_more_info)
     }
 }

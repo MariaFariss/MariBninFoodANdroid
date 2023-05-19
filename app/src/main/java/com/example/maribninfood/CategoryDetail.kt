@@ -32,7 +32,7 @@ class CategoryDetail : AppCompatActivity() {
 
         setContentView(binding.root)
         val getData = intent.getStringExtra("category")
-        recyclerViewCategory = binding.rvSubCategory
+        recyclerViewCategory = binding.categoryDetailCard
         recyclerViewCategory.layoutManager = LinearLayoutManager(this)
 
         RecipeDao.getRecipeByCategory(getData!!){
