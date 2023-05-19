@@ -117,9 +117,6 @@ class HomeFragment : Fragment() {
 //                }
 //                return false
 
-
-
-
                 if (!isRestoringViewState) {
                     searchList.clear()
                     val searchText = newText?.toLowerCase(Locale.getDefault()) ?: ""

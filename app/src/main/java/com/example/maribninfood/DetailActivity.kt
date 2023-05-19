@@ -66,18 +66,17 @@ class DetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_detail)
         val ref = intent.getStringExtra("android")
         RecipeDao.getRecipeByRef(ref!!) { ref->
-            val detailTitle: TextView = findViewById(R.id.detailTitle)
-            val detailDesc: TextView = findViewById(R.id.detailDesc)
-            val image : ImageView = findViewById(R.id.detailImage)
+            val detailTitle: TextView = findViewById(R.id.dishTitle)
+            val detailDesc: TextView = findViewById(R.id.tvIngredients)
+            val detailInstruction: TextView = findViewById(R.id.tvInstructions)
+            val image : ImageView = findViewById(R.id.imgToolbarBtnBack)
 
             detailTitle.text = ref.dataTitle
             detailDesc.text = ref.dataDesc
+            detailInstruction.text = ref.instruction
             Glide.with(App.applicationContext)
                 .load(Uri.parse(ref.dataImage))
                 .into(image)
         }
-
-
-
     }
 }

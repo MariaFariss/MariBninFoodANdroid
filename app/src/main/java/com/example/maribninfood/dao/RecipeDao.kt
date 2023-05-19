@@ -27,7 +27,8 @@ object RecipeDao {
                             document.data["dataTitle"] as String,
                             document.data["dataDesc"] as String,
                             document.data["newRecipes"] as Boolean,
-                            ""
+                            "",
+                            document.data["instruction"] as String
                         )
                     )
 
@@ -54,7 +55,9 @@ object RecipeDao {
                             document.data["dataTitle"] as String,
                             document.data["dataDesc"] as String,
                             document.data["newRecipes"] as Boolean,
-                            ""
+                            "",
+                            document.data["instruction"] as String
+
                         )
                     )
 
@@ -80,7 +83,9 @@ object RecipeDao {
                     document.data!!["dataTitle"] as String,
                     document.data!!["dataDesc"] as String,
                     document.data!!["newRecipes"] as Boolean,
-                    ""
+                    "",
+                    document.data!!["instruction"] as String
+
                 ))
             }
 
