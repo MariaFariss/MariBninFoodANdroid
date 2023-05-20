@@ -7,36 +7,43 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.maribninfood.R
 import com.example.maribninfood.databinding.FragmentAccountBinding
 
 class AccountFragment : Fragment() {
 
-    private var _binding: FragmentAccountBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+//    private var _binding: FragmentAccountBinding? = null
+//    private val binding get() = _binding!!
+//
+//    override fun onCreateView(
+//        inflater: LayoutInflater,
+//        container: ViewGroup?,
+//        savedInstanceState: Bundle?
+//    ): View {
+//        val dashboardViewModel =
+//            ViewModelProvider(this).get(AccountViewModel::class.java)
+//
+//        _binding = FragmentAccountBinding.inflate(inflater, container, false)
+//        val root: View = binding.root
+//
+////        val textView: TextView = binding.btnBackToHome
+////        dashboardViewModel.text.observe(viewLifecycleOwner) {
+////            textView.text = it
+////        }
+//        return root
+//    }
+//
+//    override fun onDestroyView() {
+//        super.onDestroyView()
+//        _binding = null
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        val dashboardViewModel =
-            ViewModelProvider(this).get(AccountViewModel::class.java)
-
-        _binding = FragmentAccountBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.btnBackToHome
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    ): View? {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_account, container, false)
     }
 }

@@ -1,123 +1,66 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <!-- Image du profil -->
-    <ImageView
-        android:id="@+id/profile_image"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:src="@drawable/baseline_account_circle_24"
-        android:scaleType="centerCrop"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp" />
-
-    <!-- Bouton "Back to Home" -->
-    <Button
-        android:id="@+id/btn_back_to_home"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Back to Home"
-        android:layout_below="@id/profile_image"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp" />
-
-    <!-- Informations sur le profil -->
-
-    <TextView
-        android:id="@+id/tv_username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/btn_back_to_home"
-        android:layout_alignStart="@id/btn_back_to_home"
-        android:layout_marginStart="-57dp"
-        android:layout_marginTop="32dp"
-        android:text="Pseudo: John Doe"
-        android:drawableLeft="@drawable/baseline_account_circle_24"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/tv_saveList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/btn_back_to_home"
-        android:layout_alignStart="@id/btn_back_to_home"
-        android:layout_marginStart="-53dp"
-        android:layout_marginTop="90dp"
-        android:text="My saved recipes"
-        android:drawableLeft="@drawable/baseline_bookmark_24"
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/tv_likedList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/btn_back_to_home"
-        android:layout_alignStart="@id/btn_back_to_home"
-        android:layout_marginStart="-53dp"
-        android:layout_marginTop="146dp"
-        android:text="My like recipes"
-        android:drawableLeft="@drawable/baseline_favorite_24"
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/tv_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_username"
-        android:layout_alignStart="@id/tv_username"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="161dp"
-        android:drawableLeft="@drawable/baseline_email_24"
-        android:text="Email: john.doe@example.com"
-        android:textSize="18sp" />
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    tools:context=".MainActivity">
 
     <LinearLayout
-        android:id="@+id/buttons_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_email"
-        android:layout_marginTop="166dp"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btn_change_password"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentStart="true"
+                    android:padding="5dp"
+                    android:src="@drawable/baseline_arrow_back_24" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/baseline_key_24"
-            android:elevation="0dp"
-            android:minWidth="0dp"
-            android:minHeight="0dp"
-            android:text="Change Password"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            android:typeface="sans" />
+            android:orientation="vertical">
 
-        <Space
-            android:id="@+id/space_between_buttons"
-            android:layout_width="@dimen/_10dp"
-            android:layout_height="@dimen/_10dp" />
-
-        <Button
-            android:id="@+id/deconnexion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/baseline_logout_24"
-            android:elevation="0dp"
-            android:minWidth="0dp"
-            android:minHeight="0dp"
-            android:text="Sign out"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            android:typeface="sans" />
-
+        </LinearLayout>
+        
     </LinearLayout>
 
-</RelativeLayout>
+    <include
+        android:layout_gravity="center"
+        layout="@layout/item_image"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_width="match_parent" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <include layout="@layout/item_add"/>
+            <include layout="@layout/item_email"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
