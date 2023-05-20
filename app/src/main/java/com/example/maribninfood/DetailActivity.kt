@@ -70,7 +70,7 @@ class DetailActivity : AppCompatActivity() {
             val image : ImageView = findViewById(R.id.imgToolbarBtnBack)
             val saveButton : Button = findViewById(R.id.btnSave)
 
-            //saveButton
+            //save ui du Button pour que  l'ui reste sauvegarder une fois sauvgarder
             val user = FirebaseAuth.getInstance().currentUser
             val mail = user?.email
             SaveDao.isSaved(mail!!,ref.id) {isSaved,referenceID ->

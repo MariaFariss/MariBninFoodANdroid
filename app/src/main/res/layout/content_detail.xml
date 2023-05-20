@@ -275,16 +275,35 @@
             </androidx.cardview.widget.CardView>
 
 
-            <Button
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/btnSave"
-                android:textColor="@color/white"
-                android:layout_margin="@dimen/_10dp"
-                android:paddingStart="20dp"
-                android:paddingEnd="20dp"
-                android:drawableLeft="@drawable/baseline_bookmark_border_24"
-                android:text="Save"/>
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnSave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/baseline_bookmark_border_24"
+                    android:layout_margin="@dimen/_10dp"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:text="Save"
+                    android:textColor="@color/white" />
+
+                <Button
+                    android:id="@+id/btnShare"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/baseline_share_24"
+                    android:layout_margin="@dimen/_10dp"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:text="Share"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
