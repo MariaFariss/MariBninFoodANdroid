@@ -41,6 +41,7 @@
 
 package com.example.maribninfood
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -69,6 +70,7 @@ class DetailActivity : AppCompatActivity() {
             val detailInstruction: TextView = findViewById(R.id.tvInstructions)
             val image : ImageView = findViewById(R.id.imgToolbarBtnBack)
             val saveButton : Button = findViewById(R.id.btnSave)
+            val shareButton = findViewById<Button>(R.id.btnShare)
 
             //save ui du Button pour que  l'ui reste sauvegarder une fois sauvgarder
             val user = FirebaseAuth.getInstance().currentUser
@@ -97,6 +99,12 @@ class DetailActivity : AppCompatActivity() {
                         }
                 }
             }
+
+            //pour le partage
+            shareButton.setOnClickListener {
+                shareRecipe(ref)
+            }
+
         }
 
     }
@@ -108,6 +116,16 @@ class DetailActivity : AppCompatActivity() {
             saveButton.text = "Save"
             saveButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_bookmark_border_24, 0, 0, 0)
         }
+    }
+
+    fun shareRecipe(recipe: RecipeClass) {
+        val sendIntent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, "Check out this recipe: ${recipe.dataTitle} - ${recipe.dataImage}")
+            type = "text/plain"
+        }
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        startActivity(shareIntent)
     }
 
 }
