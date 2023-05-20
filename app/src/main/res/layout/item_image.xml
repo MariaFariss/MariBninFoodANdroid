@@ -68,7 +68,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="Actions"
+                        android:text="My Recipes"
                         android:textColor="#636262"
                         android:textSize="14sp"
                         android:textStyle="bold" />
