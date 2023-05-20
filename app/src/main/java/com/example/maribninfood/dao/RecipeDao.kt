@@ -10,7 +10,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 object RecipeDao {
 
     private const val TAG  = "RecipeDao"
-    private const val COLLECTION  = "Recipe"
+    public const val COLLECTION  = "Recipe"
     private lateinit var db : FirebaseFirestore
 
 

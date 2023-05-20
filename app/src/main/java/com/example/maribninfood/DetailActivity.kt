@@ -44,6 +44,7 @@ package com.example.maribninfood
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.google.android.material.snackbar.Snackbar
@@ -51,7 +52,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.maribninfood.dao.CategoryDao
 import com.example.maribninfood.dao.RecipeDao
+import com.example.maribninfood.dao.SaveDao
 import com.example.maribninfood.model.RecipeClass
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 class DetailActivity : AppCompatActivity() {
 
@@ -64,6 +68,14 @@ class DetailActivity : AppCompatActivity() {
             val detailDesc: TextView = findViewById(R.id.tvIngredients)
             val detailInstruction: TextView = findViewById(R.id.tvInstructions)
             val image : ImageView = findViewById(R.id.imgToolbarBtnBack)
+            val saveButton : Button = findViewById(R.id.btnSave)
+
+            //saveButton
+            val user = FirebaseAuth.getInstance().currentUser
+            val mail = user?.email
+            SaveDao.isSaved(mail!!,ref.id) {isSaved,referenceID ->
+                changeUi(isSaved, saveButton)
+            }
 
             detailTitle.text = ref.dataTitle
             detailDesc.text = ref.dataDesc
@@ -71,6 +83,31 @@ class DetailActivity : AppCompatActivity() {
             Glide.with(App.applicationContext)
                 .load(Uri.parse(ref.dataImage))
                 .into(image)
+            //save button
+            saveButton.setOnClickListener(){
+                SaveDao.isSaved(mail!!,ref.id) {isSaved,referenceID ->
+                    if(isSaved){
+                        SaveDao.unsaveRecipe(referenceID){
+                            changeUi(!isSaved,saveButton)
+                        }
+                    }
+                    else
+                        SaveDao.saveRecipe(mail,ref.id){
+                            changeUi(!isSaved,saveButton)
+                        }
+                }
+            }
+        }
+
+    }
+    fun changeUi(isRecipeSaved: Boolean, saveButton: Button) {
+        if (isRecipeSaved) {
+            saveButton.text = "Unsave"
+            saveButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_bookmark_24, 0, 0, 0)
+        } else {
+            saveButton.text = "Save"
+            saveButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baseline_bookmark_border_24, 0, 0, 0)
         }
     }
+
 }

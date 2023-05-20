@@ -14,6 +14,7 @@ import com.example.maribninfood.adaptor.ShowCategoryRecipeAdapter
 import com.example.maribninfood.adaptor.SubCategoryAdapter
 import com.example.maribninfood.dao.CategoryDao
 import com.example.maribninfood.dao.RecipeDao
+import com.example.maribninfood.dao.SaveDao
 import com.example.maribninfood.databinding.ActivityCategoryDetailBinding
 import com.example.maribninfood.databinding.ActivityDetailBinding
 import com.example.maribninfood.databinding.ActivitySignupBinding
@@ -45,5 +46,20 @@ class CategoryDetail : AppCompatActivity() {
                 Log.d("Categorydetail", "detaileddd sub")
             }
         }
+
+        ///Save Recipe
+
+//        SaveDao.isSaved("adminnnTest", "Recipe/6zxHApbCfNA4qae38Tmd"){bool, res ->
+//            Log.d("categoryDetail", "bool "+bool)
+//            Log.d("categoryDetail", "res "+res)
+//            SaveDao.unsaveRecipe(res) {
+//                Log.d("supp", "recipe unsaved ")
+//            }
+//        }
+//
+//        SaveDao.saveRecipe("test1", "9hkolEaCGmfh2p1f5OYE"){
+//            Log.d("category", "test")
+//        }
+
     }
 }

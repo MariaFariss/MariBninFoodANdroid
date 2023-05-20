@@ -276,17 +276,19 @@
 
 
             <Button
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/btnYoutube"
+                android:id="@+id/btnSave"
                 android:textColor="@color/white"
                 android:layout_margin="@dimen/_10dp"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
+                android:drawableLeft="@drawable/baseline_bookmark_border_24"
                 android:text="Save"/>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 

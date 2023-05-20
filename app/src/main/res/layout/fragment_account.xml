@@ -7,7 +7,7 @@
         android:id="@+id/profile_image"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:src="@drawable/account"
+        android:src="@drawable/baseline_account_circle_24"
         android:scaleType="centerCrop"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp" />
@@ -23,70 +23,100 @@
         android:layout_marginTop="16dp" />
 
     <!-- Informations sur le profil -->
+
     <TextView
         android:id="@+id/tv_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Username: John Doe"
-        android:textSize="18sp"
         android:layout_below="@id/btn_back_to_home"
-        android:layout_marginTop="16dp"
-        android:layout_alignStart="@id/btn_back_to_home" />
+        android:layout_alignStart="@id/btn_back_to_home"
+        android:layout_marginStart="-57dp"
+        android:layout_marginTop="32dp"
+        android:text="Pseudo: John Doe"
+        android:drawableLeft="@drawable/baseline_account_circle_24"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tv_saveList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_back_to_home"
+        android:layout_alignStart="@id/btn_back_to_home"
+        android:layout_marginStart="-53dp"
+        android:layout_marginTop="90dp"
+        android:text="My saved recipes"
+        android:drawableLeft="@drawable/baseline_bookmark_24"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tv_likedList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_back_to_home"
+        android:layout_alignStart="@id/btn_back_to_home"
+        android:layout_marginStart="-53dp"
+        android:layout_marginTop="146dp"
+        android:text="My like recipes"
+        android:drawableLeft="@drawable/baseline_favorite_24"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/tv_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Email: john.doe@example.com"
-        android:textSize="18sp"
         android:layout_below="@id/tv_username"
-        android:layout_marginTop="8dp"
-        android:layout_alignStart="@id/tv_username" />
+        android:layout_alignStart="@id/tv_username"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="161dp"
+        android:drawableLeft="@drawable/baseline_email_24"
+        android:text="Email: john.doe@example.com"
+        android:textSize="18sp" />
 
     <LinearLayout
         android:id="@+id/buttons_layout"
-        android:orientation = "horizontal"
-        android:gravity = "center_horizontal"
-        android:layout_below = "@+id/tv_email"
-        android:layout_width = "match_parent"
-        android:layout_height = "wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_email"
+        android:layout_marginTop="166dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/btn_change_password"
-            android:textSize = "12sp"
-            android:layout_width = "wrap_content"
-            android:layout_height = "wrap_content"
-            android:textAllCaps = "false"
-            android:textColor = "@color/black"
-            android:textStyle = "bold"
-            android:typeface = "sans"
-            android:minWidth = "0dp"
-            android:minHeight = "0dp"
-            android:elevation = "0dp"
-            android:textAlignment = "center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:drawableLeft="@drawable/baseline_key_24"
-            android:text = "Change Password"/>
+            android:elevation="0dp"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:text="Change Password"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:typeface="sans" />
 
         <Space
             android:id="@+id/space_between_buttons"
-            android:layout_width = "@dimen/_10dp"
-            android:layout_height = "@dimen/_10dp"/>
+            android:layout_width="@dimen/_10dp"
+            android:layout_height="@dimen/_10dp" />
 
         <Button
             android:id="@+id/deconnexion"
-            android:textSize = "12sp"
-            android:layout_width = "wrap_content"
-            android:layout_height = "wrap_content"
-            android:textAllCaps = "false"
-            android:textColor = "@color/black"
-            android:textStyle = "bold"
-            android:typeface = "sans"
-            android:minWidth = "0dp"
-            android:minHeight = "0dp"
-            android:elevation = "0dp"
-            android:textAlignment = "center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:drawableLeft="@drawable/baseline_logout_24"
-            android:text = "Sign out"/>
+            android:elevation="0dp"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:text="Sign out"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:typeface="sans" />
 
     </LinearLayout>
 

@@ -48,6 +48,21 @@
 
             </androidx.cardview.widget.CardView>
 
+            <Space
+                android:id="@+id/space_between_buttons"
+                android:layout_width = "@dimen/_20sp"
+                android:layout_height = "@dimen/_20sp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gilroy_bold"
+                android:paddingStart="@dimen/_10dp"
+                android:text="New Recipes"
+                android:id="@+id/NewRecipeCategory"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_15sp" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_main_category"
                 android:layout_width="390dp"
