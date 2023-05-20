@@ -58,26 +58,29 @@ override fun onCreateView(
 ): View? {
     val view = inflater.inflate(R.layout.fragment_account, container, false)
     val logoutButton: ImageView = view.findViewById(R.id.logoutButton)
+    val goBack : ImageView=view.findViewById(R.id.arrowBack)
     logoutButton.setOnClickListener {
         logout()
     }
+//    goBack.setOnClickListener(){
+//        parentFragmentManager.popBackStack()
+//    }
 
     return view
 }
 
+//    private fun logout() {
+//        val intent = Intent(activity, LoginActivity::class.java)
+//        startActivity(intent)
+//    }
 
-    private fun logout() {
-        val intent = Intent(activity, LoginActivity::class.java)
-        startActivity(intent)
-//        activity?.finish() // Facultatif : fermer l'activité courante après la déconnexion
-    }
-//private fun logout() {
-//    // Déconnexion de l'utilisateur actuel
-//    FirebaseAuth.getInstance().signOut()
-//
-//    // Rediriger vers l'écran de connexion
-//    val intent = Intent(activity, LoginActivity::class.java)
-//    startActivity(intent)
-//    activity?.finish() // Facultatif : fermer l'activité courante après la déconnexion
-//}
+private fun logout() {
+    // Déconnexion de l'utilisateur actuel
+    FirebaseAuth.getInstance().signOut()
+
+    // Rediriger vers l'écran de connexion
+    val intent = Intent(activity, LoginActivity::class.java)
+    startActivity(intent)
+    activity?.finish() // Facultatif : fermer l'activité courante après la déconnexion
+}
 }
