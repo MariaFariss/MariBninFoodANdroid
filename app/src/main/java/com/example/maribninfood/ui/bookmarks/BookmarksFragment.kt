@@ -28,7 +28,7 @@ class BookmarksFragment : Fragment() {
         _binding = FragmentBookmarksBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.tvCategory
+        val textView: TextView = binding.btnMoreInfo
 //        notificationsViewModel.text.observe(viewLifecycleOwner) {
 //            textView.text = it
 //        }

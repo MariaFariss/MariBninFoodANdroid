@@ -1,59 +1,179 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".ui.home.HomeFragment">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
 
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="horizontal">
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/_10dp"
+        app:cardCornerRadius="@dimen/_10dp"
+        app:cardElevation="@dimen/_5sdp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/gilroy_bold"
-                android:padding="@dimen/_10dp"
-                android:text="My Bookmarks"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_20sp" />
+            <androidx.cardview.widget.CardView
+                android:layout_width="120dp"
+                android:layout_height="160dp"
+                app:cardCornerRadius="@dimen/_10dp"
+                app:cardElevation="@dimen/_10dp"
+                app:strokeColor="@color/black"
+                app:strokeWidth="2dp">
 
+                <ImageView
+                    android:id="@+id/img_dish"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img" />
+            </androidx.cardview.widget.CardView>
 
             <Space
-                android:id="@+id/space_between_buttons"
-                android:layout_width = "@dimen/_20sp"
-                android:layout_height = "@dimen/_20sp"/>
+                android:layout_width="70dp"
+                android:layout_height="match_parent" />
 
-
-
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/gilroy_bold"
-                android:paddingStart="@dimen/_10dp"
-                android:text="Category name"
-                android:id="@+id/tvCategory"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_15sp" />
+                android:orientation="vertical">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_sub_category"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_10dp"
-                android:orientation="horizontal"
-                tools:itemCount="1"
-                tools:listitem="@layout/item_rv_sub_category"/>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="@dimen/_10dp"
+                    app:cardElevation="@dimen/_5sdp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp">
+
+                        <TextView
+                            android:id="@+id/tv_dish_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/gilroy_bold"
+                            android:textAlignment="center"
+                            android:padding="@dimen/_10dp"
+                            android:text="Dish name"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_15sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/baseline_access_time_24" />
+
+                                <TextView
+                                    android:id="@+id/tvTime"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="30 min"
+                                    android:textSize="@dimen/_10dp"
+                                    android:textColor="@color/prettyPink"
+                                    android:maxEms="10"
+                                    android:maxLines="2"
+                                    android:textStyle="bold"
+                                    android:fontFamily="@font/gilroy_light"
+                                    android:paddingTop="@dimen/_10dp"
+                                    android:paddingStart="@dimen/_5sdp"
+                                    android:paddingBottom="@dimen/_10dp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:layout_marginStart="@dimen/_10dp"
+                                android:layout_marginEnd="@dimen/_10dp"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/baseline_local_fire_department_24" />
+
+                                <TextView
+                                    android:id="@+id/cal"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="247 cals"
+                                    android:textSize="@dimen/_10dp"
+                                    android:textColor="@color/prettyPink"
+                                    android:maxEms="10"
+                                    android:maxLines="2"
+                                    android:textStyle="bold"
+                                    android:fontFamily="@font/gilroy_light"
+                                    android:paddingTop="@dimen/_10dp"
+                                    android:paddingStart="@dimen/_5sdp"
+                                    android:paddingBottom="@dimen/_10dp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/baseline_person_24" />
+
+                                <TextView
+                                    android:id="@+id/tvServing"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="3 persons"
+                                    android:textSize="@dimen/_10dp"
+                                    android:textColor="@color/prettyPink"
+                                    android:maxEms="10"
+                                    android:maxLines="2"
+                                    android:textStyle="bold"
+                                    android:fontFamily="@font/gilroy_light"
+                                    android:paddingTop="@dimen/_10dp"
+                                    android:paddingStart="@dimen/_5sdp"
+                                    android:paddingBottom="@dimen/_10dp" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_10dp" />
+
+                        <Button
+                            android:id="@+id/btn_more_info"
+                            style="?attr/borderlessButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="More Info" />
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
         </LinearLayout>
-    </ScrollView>
 
-</RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
