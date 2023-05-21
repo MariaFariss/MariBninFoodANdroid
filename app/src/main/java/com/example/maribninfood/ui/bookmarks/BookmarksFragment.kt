@@ -49,9 +49,12 @@ class BookmarksFragment : Fragment() {
                         }
                         //le boutton delete
                         bookmarksAdapter.onDeleteClick = {
-                            SaveDao.unsaveRecipe(save.idSave){
+                            SaveDao.getSavedRecipeByIdandUser(mail, it.id){ saveDelete->
+                                Log.d("bookmarkfragment ", "deletebookmark test "+saveDelete.idSave)
+                                SaveDao.unsaveRecipe(saveDelete.idSave){
                                 listRecipe.remove(it)
                                 bookmarksRecyclerView.adapter?.notifyDataSetChanged()
+                            }
                             }
                         }
                     }

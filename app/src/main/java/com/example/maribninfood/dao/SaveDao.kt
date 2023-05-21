@@ -87,5 +87,28 @@ object SaveDao {
 
     }
 
+    fun getSavedRecipeByIdandUser(email: String?, refRecipe: String, callback: (SaveRecipe) -> Unit) {
+        val savedRecipes = ArrayList<SaveRecipe>()
+        db.collection(COLLECTION)
+            .whereEqualTo("mail", email)
+            .whereEqualTo("refRecipe", db.document(refRecipe))
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                for (document in querySnapshot) {
+                    val recipeRef = document.data["refRecipe"] as DocumentReference
+                    savedRecipes.add(SaveRecipe(
+                        document.reference.path,
+                        document["mail"] as String,
+                        recipeRef.path
+                    ))
+
+                }
+                Log.d("SaveDao" , "taille de la liste "+savedRecipes.size)
+                callback(savedRecipes[0])
+
+            }
+
+    }
+
 }
 

@@ -63,7 +63,6 @@ class DetailActivity : AppCompatActivity() {
             shareButton.setOnClickListener {
                 shareRecipe(ref)
             }
-
         }
 
     }
