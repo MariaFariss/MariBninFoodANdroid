@@ -1,5 +1,6 @@
 package com.example.maribninfood.adaptor
 
+import android.content.Intent
 import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,17 +8,24 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.maribninfood.App
+import com.example.maribninfood.DetailActivity
 import com.example.maribninfood.R
+import com.example.maribninfood.dao.SaveDao
 import com.example.maribninfood.model.Categories
 import com.example.maribninfood.model.RecipeClass
+import com.example.maribninfood.model.SaveRecipe
 
-class ShowCategoryRecipeAdapter(private val dataList: ArrayList<RecipeClass>): RecyclerView.Adapter<ShowCategoryRecipeAdapter.ViewHolderClass>() {
+
+class ShowCategoryRecipeAdapter(private val dataList: ArrayList<RecipeClass>,private val layoutResId: Int): RecyclerView.Adapter<ShowCategoryRecipeAdapter.ViewHolderClass>() {
     var onItemClick: ((RecipeClass) -> Unit)? = null
+    var onDeleteClick: ((RecipeClass) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderClass {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.category_detail_card, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(layoutResId, parent, false)
         return ViewHolderClass(itemView)
     }
 
@@ -33,6 +41,9 @@ class ShowCategoryRecipeAdapter(private val dataList: ArrayList<RecipeClass>): R
         holder.rvBoutton.setOnClickListener{
             onItemClick?.invoke(currentItem)
         }
+        holder.deleteButton?.setOnClickListener{
+            onDeleteClick?.invoke(currentItem)
+        }
 
     }
     override fun getItemCount(): Int {
@@ -43,5 +54,6 @@ class ShowCategoryRecipeAdapter(private val dataList: ArrayList<RecipeClass>): R
         val rvImage: ImageView = itemView.findViewById(R.id.img_dish)
         val rvTitle: TextView = itemView.findViewById(R.id.tv_dish_name)
         val rvBoutton: TextView = itemView.findViewById(R.id.btn_more_info)
+        val deleteButton: TextView? = itemView.findViewById(R.id.btn_delete)
     }
 }

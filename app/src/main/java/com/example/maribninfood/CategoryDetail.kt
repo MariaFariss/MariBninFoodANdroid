@@ -37,7 +37,7 @@ class CategoryDetail : AppCompatActivity() {
         recyclerViewCategory.layoutManager = LinearLayoutManager(this)
 
         RecipeDao.getRecipeByCategory(getData!!){
-            myAdapterCategory = ShowCategoryRecipeAdapter(it)
+            myAdapterCategory = ShowCategoryRecipeAdapter(it,R.layout.category_detail_card)
             recyclerViewCategory.adapter = myAdapterCategory
             myAdapterCategory.onItemClick = {
                 val intent = Intent(this, DetailActivity::class.java)

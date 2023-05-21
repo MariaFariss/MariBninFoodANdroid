@@ -49,7 +49,7 @@
                 android:layout_margin="@dimen/_10dp"
                 android:orientation="horizontal"
                 tools:itemCount="1"
-                tools:listitem="@layout/category_detail_card" />
+                tools:listitem="@layout/bookmark_card" />
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>
