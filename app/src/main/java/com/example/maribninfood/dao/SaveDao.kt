@@ -1,15 +1,18 @@
 package com.example.maribninfood.dao
 
 import android.util.Log
+import com.example.maribninfood.model.RecipeClass
 import com.example.maribninfood.model.SaveRecipe
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 
 object SaveDao {
 
-    private const val COLLECTION  = "SaveRecipe"
+    private const val COLLECTION = "SaveRecipe"
     val db = FirebaseFirestore.getInstance()
+
     //function qui check si un une recette est deja sauvegarder dans firestore
-    fun isSaved(mail : String, refRecipe : String, onResultRetrieved : (Boolean, String) ->(Unit)){
+    fun isSaved(mail: String, refRecipe: String, onResultRetrieved: (Boolean, String) -> (Unit)) {
 
         db.collection(COLLECTION)
             .whereEqualTo("refRecipe", db.document(refRecipe))
@@ -17,21 +20,20 @@ object SaveDao {
             .get()
             .addOnSuccessListener { documents ->
                 val documentExists = !documents.isEmpty
-                if(documentExists) {
+                if (documentExists) {
                     val refRecipeSaved = documents.documents[0].reference.path
                     onResultRetrieved(documentExists, refRecipeSaved)
-                }
-                else
+                } else
                     onResultRetrieved(documentExists, null.toString())
 
             }
             .addOnFailureListener { exception ->
-               Log.d("SaveDAo", "failure ")
+                Log.d("SaveDAo", "failure ")
             }
     }
 
     //save recipe
-    fun saveRecipe(mail : String, refRecipe : String, onResult: () -> Unit){
+    fun saveRecipe(mail: String, refRecipe: String, onResult: () -> Unit) {
         val recipeRef = db.document(refRecipe)
         val data = hashMapOf(
             "mail" to mail,
@@ -43,39 +45,47 @@ object SaveDao {
             .addOnSuccessListener {
                 onResult()
             }
-            .addOnFailureListener{
+            .addOnFailureListener {
                 Log.d("SaveRecipe", "failure ")
             }
     }
 
     //unsaveRecipe
-//    fun unsaveRecipes(mail : String,refRecipe: String, onResult: () -> Unit){
-//        db.collection(COLLECTION)
-//            .whereEqualTo("refRecipe", db.collection(RecipeDao.COLLECTION)
-//            .whereEqualTo("mail", mail)
-//            .get()
-//            .addOnSuccessListener { documents ->
-//                for (document in documents) {
-//                    document.reference.delete()
-//
-//                }
-//                onResult()
-//            }
-//            .addOnFailureListener{
-//                Log.d("UnsaveRecipes", "failure ")
-//            })
-//    }
-
-    fun unsaveRecipe(documentId: String, onResult: () -> Unit){
-            db.document(documentId)
+    fun unsaveRecipe(documentId: String, onResult: () -> Unit) {
+        db.document(documentId)
             .delete()
             .addOnSuccessListener {
                 onResult()
             }
-            .addOnFailureListener{
+            .addOnFailureListener {
                 Log.d("UnsaveRecipe", "failure ")
             }
     }
 
 
+    fun getSavedRecipes(email: String?, callback: (List<SaveRecipe>) -> Unit) {
+        if (email != null) {
+            val savedRecipes = ArrayList<SaveRecipe>()
+            db.collection(COLLECTION)
+                .whereEqualTo("mail", email)
+                .get()
+                .addOnSuccessListener { querySnapshot ->
+                    for (document in querySnapshot) {
+                        val recipeRef = document.data["refRecipe"] as DocumentReference
+                        savedRecipes.add(
+                            SaveRecipe(
+                                document.reference.path,
+                                email,
+                                recipeRef.path
+                            )
+                        )
+
+                    }
+                    callback(savedRecipes)
+                }
+        }
+
+    }
+
 }
+
