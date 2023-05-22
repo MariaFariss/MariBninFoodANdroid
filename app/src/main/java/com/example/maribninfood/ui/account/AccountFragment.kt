@@ -65,7 +65,6 @@ override fun onCreateView(
     }
 
     goBack.setOnClickListener(){
-
         val intent = Intent(activity, MainActivity::class.java)
         startActivity(intent)
     }

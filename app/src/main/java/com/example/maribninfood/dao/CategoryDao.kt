@@ -2,7 +2,6 @@ package com.example.maribninfood.dao
 
 import android.util.Log
 import com.example.maribninfood.model.Categories
-import com.example.maribninfood.ui.home.HomeFragment
 import com.google.firebase.firestore.FirebaseFirestore
 
 object CategoryDao {
