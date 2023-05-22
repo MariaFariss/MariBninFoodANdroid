@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/colorBackground"
     tools:context=".DetailActivity">
 
 
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/appBar"
         android:theme="@style/Theme.AppCompat.NoActionBar"
-        android:background="@color/white">
+        android:background="@color/colorBackground">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -221,7 +221,7 @@
                 android:fontFamily="@font/gilroy_bold"
                 android:paddingStart="@dimen/_10dp"
                 android:text="Ingredients"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="@dimen/_15sp" />
 
             <androidx.cardview.widget.CardView
@@ -240,7 +240,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/_15sp"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textStyle="bold"
                         android:fontFamily="@font/gilroy_light"
                         android:paddingTop="@dimen/_10dp"
@@ -256,7 +256,7 @@
                 android:fontFamily="@font/gilroy_bold"
                 android:paddingStart="@dimen/_10dp"
                 android:text="Instructions"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="@dimen/_15sp" />
 
             <androidx.cardview.widget.CardView
@@ -276,13 +276,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/_15sp"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textStyle="bold"
                         android:fontFamily="@font/gilroy_light"
                         android:paddingTop="@dimen/_10dp"
-                        android:paddingStart="5dp"
+                        android:paddingStart="@dimen/_5sdp"
                         android:paddingBottom="@dimen/_10dp"/>
-
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 

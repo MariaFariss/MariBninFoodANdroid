@@ -35,11 +35,11 @@
             android:id="@+id/tv_dish_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/gilroy_light"
+            android:fontFamily="@font/gilroy_bold"
             android:maxLines="2"
             android:paddingStart="@dimen/_10dp"
             android:text="Dish Name"
-            android:textColor="@color/black"
+            android:textColor="@color/grey"
             android:textSize="@dimen/_15sp" />
     </LinearLayout>
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/colorBackground"
     tools:context=".ui.home.HomeFragment">
 
 
@@ -18,14 +18,24 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/gilroy_bold"
-                android:padding="@dimen/_10dp"
-                android:text="All Recipes"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_20sp" />
+            <!--            <TextView-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:fontFamily="@font/gilroy_bold"-->
+            <!--                android:padding="@dimen/_10dp"-->
+            <!--                android:text="What are your cravings for today ?"-->
+            <!--                android:textColor="@color/black"-->
+            <!--                android:layout_gravity="center"-->
+            <!--                android:textSize="@dimen/_20sp" />-->
+
+
+            <ImageView
+                android:id="@+id/img_dish"
+                android:layout_width="wrap_content"
+                android:layout_height="126dp"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                android:src="@drawable/logo_app" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -50,18 +60,19 @@
 
             <Space
                 android:id="@+id/space_between_buttons"
-                android:layout_width = "@dimen/_20sp"
-                android:layout_height = "@dimen/_20sp"/>
+                android:layout_width="@dimen/_20sp"
+                android:layout_height="@dimen/_20sp" />
 
             <TextView
+                android:id="@+id/NewRecipeCategory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gilroy_bold"
                 android:paddingStart="@dimen/_10dp"
                 android:text="New Recipes"
-                android:id="@+id/NewRecipeCategory"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="@dimen/_15sp" />
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_main_category"
@@ -73,13 +84,13 @@
                 tools:listitem="@layout/item_rv_main_category" />
 
             <TextView
+                android:id="@+id/tvCategory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gilroy_bold"
                 android:paddingStart="@dimen/_10dp"
                 android:text="Category name"
-                android:id="@+id/tvCategory"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="@dimen/_15sp" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -89,7 +100,7 @@
                 android:layout_margin="@dimen/_10dp"
                 android:orientation="horizontal"
                 tools:itemCount="1"
-                tools:listitem="@layout/item_rv_sub_category"/>
+                tools:listitem="@layout/item_rv_sub_category" />
         </LinearLayout>
     </ScrollView>
 
