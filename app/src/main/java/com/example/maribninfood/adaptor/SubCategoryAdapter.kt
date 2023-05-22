@@ -41,6 +41,7 @@ class SubCategoryAdapter(private val dataList: ArrayList<Categories>): RecyclerV
     class ViewHolderClass(itemView: View): RecyclerView.ViewHolder(itemView) {
         val rvImage: ImageView = itemView.findViewById(R.id.img_dish)
         val rvTitle: TextView = itemView.findViewById(R.id.tv_dish_name)
+//        val backArrowButton: TextView = itemView.findViewById(R.id.arrowBack)
     }
 
 }
