@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.maribninfood.LoginActivity
+import com.example.maribninfood.MainActivity
 import com.example.maribninfood.R
 import com.example.maribninfood.databinding.FragmentAccountBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -62,9 +63,12 @@ override fun onCreateView(
     logoutButton.setOnClickListener {
         logout()
     }
-//    goBack.setOnClickListener(){
-//        parentFragmentManager.popBackStack()
-//    }
+
+    goBack.setOnClickListener(){
+
+        val intent = Intent(activity, MainActivity::class.java)
+        startActivity(intent)
+    }
 
     return view
 }

@@ -44,6 +44,12 @@ class CategoryDetail : AppCompatActivity() {
                 intent.putExtra("android", it.id)
                 startActivity(intent)
             }
+            //back arrow
+            myAdapterCategory.onBackArrowClick = {
+                onBackPressed()
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            }
 
         }
     }

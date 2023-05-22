@@ -63,6 +63,13 @@ class DetailActivity : AppCompatActivity() {
             shareButton.setOnClickListener {
                 shareRecipe(ref)
             }
+            //back arrow
+            val backArrowButton: ImageView = findViewById(R.id.arrowBack)
+            backArrowButton.setOnClickListener {
+                val intent = Intent(this, CategoryDetail::class.java)
+                startActivity(intent)
+                Log.d("Detail Activity", "back to category detail")
+            }
         }
 
     }

@@ -23,6 +23,7 @@ import com.example.maribninfood.model.SaveRecipe
 class ShowCategoryRecipeAdapter(private val dataList: ArrayList<RecipeClass>,private val layoutResId: Int): RecyclerView.Adapter<ShowCategoryRecipeAdapter.ViewHolderClass>() {
     var onItemClick: ((RecipeClass) -> Unit)? = null
     var onDeleteClick: ((RecipeClass) -> Unit)? = null
+    var onBackArrowClick: ((RecipeClass) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderClass {
         val itemView = LayoutInflater.from(parent.context).inflate(layoutResId, parent, false)
@@ -44,6 +45,11 @@ class ShowCategoryRecipeAdapter(private val dataList: ArrayList<RecipeClass>,pri
         holder.deleteButton?.setOnClickListener{
             onDeleteClick?.invoke(currentItem)
         }
+//        //back arrow button
+//        holder.backArrowButton.setOnClickListener{
+//            onBackArrowClick?.invoke(currentItem)
+//
+//        }
 
     }
     override fun getItemCount(): Int {
@@ -55,5 +61,6 @@ class ShowCategoryRecipeAdapter(private val dataList: ArrayList<RecipeClass>,pri
         val rvTitle: TextView = itemView.findViewById(R.id.tv_dish_name)
         val rvBoutton: TextView = itemView.findViewById(R.id.btn_more_info)
         val deleteButton: TextView? = itemView.findViewById(R.id.btn_delete)
+//        val backArrowButton: ImageView = itemView.findViewById(R.id.arrowBack)
     }
 }

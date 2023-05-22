@@ -17,6 +17,7 @@ import com.example.maribninfood.model.RecipeClass
 class SubCategoryAdapter(private val dataList: ArrayList<Categories>): RecyclerView.Adapter<SubCategoryAdapter.ViewHolderClass>(){
 
     var onItemClick: ((Categories) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderClass {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_rv_sub_category, parent, false)
         return ViewHolderClass(itemView)
@@ -32,6 +33,8 @@ class SubCategoryAdapter(private val dataList: ArrayList<Categories>): RecyclerV
         holder.itemView.setOnClickListener{
             onItemClick?.invoke(currentItem)
         }
+
+
     }
 
     override fun getItemCount(): Int {
@@ -41,7 +44,6 @@ class SubCategoryAdapter(private val dataList: ArrayList<Categories>): RecyclerV
     class ViewHolderClass(itemView: View): RecyclerView.ViewHolder(itemView) {
         val rvImage: ImageView = itemView.findViewById(R.id.img_dish)
         val rvTitle: TextView = itemView.findViewById(R.id.tv_dish_name)
-//        val backArrowButton: TextView = itemView.findViewById(R.id.arrowBack)
     }
 
 }
