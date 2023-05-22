@@ -28,15 +28,17 @@ class HomeFragment : Fragment() {
     private lateinit var recyclerViewNewRecipe: RecyclerView
     private lateinit var recyclerViewCategory: RecyclerView
     private lateinit var dataList: ArrayList<RecipeClass>
+    private lateinit var dataListOfNewRecipe: ArrayList<RecipeClass>
     private lateinit var myAdapterNewRecipe: MainCategoryAdapter
     private lateinit var myAdapterCategory: SubCategoryAdapter
     private lateinit var searchView: SearchView
     private lateinit var searchList: ArrayList<RecipeClass>
     private var isRestoringViewState = false //pour recuperer la vue lorsque'on clique le dessu
 
-    companion object{
-        private const val TAG  = "HomeFragment"
+    companion object {
+        private const val TAG = "HomeFragment"
     }
+
     private var _binding: FragmentHomeBinding? = null
 
     // This property is only valid between onCreateView and
@@ -57,21 +59,24 @@ class HomeFragment : Fragment() {
         recyclerViewCategory = binding.rvSubCategory
         searchView = binding.searchView
         //on indique la forme dans laquelle on affichera notre recylcerview
-        recyclerViewNewRecipe.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+        recyclerViewNewRecipe.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         recyclerViewNewRecipe.setHasFixedSize(true)
-        recyclerViewCategory.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+        recyclerViewCategory.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         recyclerViewCategory.setHasFixedSize(true)
 
         dataList = arrayListOf<RecipeClass>()
+        dataListOfNewRecipe = arrayListOf<RecipeClass>()
         searchList = arrayListOf<RecipeClass>()
 
-    /////////////new recipes/////////////////
+        /////////////new recipes/////////////////
+        //retrieve new recipes only from the database firestore
         RecipeDao.getNewRecipe("Recipe") { listData ->
-            dataList=listData
+            dataList = listData
+            dataListOfNewRecipe.addAll(listData.filter { it.newRecipes })
             searchList.addAll(listData)
-            //associer le recyclerview avec son adapter
-//            creer un adpeter en lui passant les datas en parametter
-            myAdapterNewRecipe = MainCategoryAdapter(searchList)
+            myAdapterNewRecipe = MainCategoryAdapter(dataListOfNewRecipe)
             recyclerViewNewRecipe.adapter = myAdapterNewRecipe
             //transformer les datas d'une activité a une autre
             myAdapterNewRecipe.onItemClick = {
@@ -83,7 +88,7 @@ class HomeFragment : Fragment() {
         }
 
         ///////////////categories//////////////
-        CategoryDao.getCategories("Categories"){
+        CategoryDao.getCategories("Categories") {
             myAdapterCategory = SubCategoryAdapter(it)
             recyclerViewCategory.adapter = myAdapterCategory
             myAdapterCategory.onItemClick = {
@@ -93,13 +98,14 @@ class HomeFragment : Fragment() {
                 Log.d("home", "detaileddd sub")
             }
         }
-    ////////////pour le search /////////////
+        ////////////pour le search /////////////
         searchView.clearFocus()
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 searchView.clearFocus()
                 return true
             }
+
             override fun onQueryTextChange(newText: String?): Boolean {
 //                searchList.clear()
 //                val searchText = newText!!.toLowerCase(Locale.getDefault())
@@ -122,7 +128,9 @@ class HomeFragment : Fragment() {
                     val searchText = newText?.toLowerCase(Locale.getDefault()) ?: ""
                     if (searchText.isNotEmpty()) {
                         dataList.forEach {
-                            if (it.dataTitle.toLowerCase(Locale.getDefault()).contains(searchText)) {
+                            if (it.dataTitle.toLowerCase(Locale.getDefault())
+                                    .contains(searchText)
+                            ) {
                                 searchList.add(it)
                             }
                         }
