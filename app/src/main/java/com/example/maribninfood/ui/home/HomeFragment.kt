@@ -28,7 +28,7 @@ class HomeFragment : Fragment() {
     private lateinit var recyclerViewNewRecipe: RecyclerView
     private lateinit var recyclerViewCategory: RecyclerView
     private lateinit var dataList: ArrayList<RecipeClass>
-    private lateinit var dataListOfNewRecipe: ArrayList<RecipeClass>
+//    private lateinit var dataListOfNewRecipe: ArrayList<RecipeClass>
     private lateinit var myAdapterNewRecipe: MainCategoryAdapter
     private lateinit var myAdapterCategory: SubCategoryAdapter
     private lateinit var searchView: SearchView
@@ -67,16 +67,15 @@ class HomeFragment : Fragment() {
         recyclerViewCategory.setHasFixedSize(true)
 
         dataList = arrayListOf<RecipeClass>()
-        dataListOfNewRecipe = arrayListOf<RecipeClass>()
+//        dataListOfNewRecipe = arrayListOf<RecipeClass>()
         searchList = arrayListOf<RecipeClass>()
 
         /////////////new recipes/////////////////
         //retrieve only new recipes from the database firestore
         RecipeDao.getNewRecipe("Recipe") { listData ->
             dataList = listData
-            dataListOfNewRecipe.addAll(listData.filter { it.newRecipes })
-            searchList.addAll(listData)
-            myAdapterNewRecipe = MainCategoryAdapter(dataListOfNewRecipe)
+            searchList.addAll(listData.filter { it.newRecipes })
+            myAdapterNewRecipe = MainCategoryAdapter(searchList)
             recyclerViewNewRecipe.adapter = myAdapterNewRecipe
             //transformer les datas d'une activité a une autre
             myAdapterNewRecipe.onItemClick = {
@@ -123,7 +122,7 @@ class HomeFragment : Fragment() {
 //                }
 //                return false
 
-                if (!isRestoringViewState) {
+//                if (!isRestoringViewState) {
                     searchList.clear()
                     val searchText = newText?.toLowerCase(Locale.getDefault()) ?: ""
                     if (searchText.isNotEmpty()) {
@@ -139,7 +138,7 @@ class HomeFragment : Fragment() {
                         searchList.addAll(dataList)
                         recyclerViewNewRecipe.adapter?.notifyDataSetChanged()
                     }
-                }
+//                }
                 return false
             }
         })
