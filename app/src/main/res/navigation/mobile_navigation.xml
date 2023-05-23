@@ -16,6 +16,17 @@
         android:name="com.example.maribninfood.ui.account.AccountFragment"
         android:label="@string/title_account"
         tools:layout="@layout/fragment_account" />
+    <fragment
+        android:id="@+id/navigation_addRecipes"
+        android:name="com.example.maribninfood.ui.addRecipes.addRecipesFragement"
+        android:label="@string/title_addRecipes"
+        tools:layout="@layout/fragment_add_recipes_fragement" />
+
+    <fragment
+        android:id="@+id/navigation_editPofile"
+        android:name="com.example.maribninfood.editUserFragment"
+        android:label="@string/title_account"
+        tools:layout="@layout/fragment_edit_user" />
 
     <fragment
         android:id="@+id/navigation_notifications"

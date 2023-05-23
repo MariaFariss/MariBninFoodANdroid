@@ -9,6 +9,10 @@
         android:id="@+id/navigation_notifications"
         android:icon="@drawable/baseline_bookmark_24"
         android:title="@string/title_bookmarks" />
+    <item
+        android:id="@+id/navigation_addRecipes"
+        android:icon="@drawable/ic_add"
+        android:title="@string/title_addRecipes" />
 
     <item
         android:id="@+id/navigation_account"
