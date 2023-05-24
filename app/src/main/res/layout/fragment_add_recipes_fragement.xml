@@ -22,6 +22,18 @@
             android:padding="20dp">
 
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:fontFamily="@font/gilroy_bold"
+                android:gravity="center"
+                android:scaleType="centerCrop"
+                android:text="Add new recipes like a chef 👨‍🍳"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="30sp" />
+
             <EditText
                 android:id="@+id/signup_pseudo"
                 android:layout_width="350dp"

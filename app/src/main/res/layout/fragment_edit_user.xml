@@ -21,12 +21,18 @@
             android:orientation="vertical"
             android:padding="20dp">
 
-            <ImageView
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:src="@drawable/logo_app"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:fontFamily="@font/gilroy_bold"
+                android:gravity="center"
                 android:scaleType="centerCrop"
-                android:layout_alignParentTop="true"/>
+                android:text="Edit your profile 🙂"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="35sp" />
+
             <EditText
                 android:id="@+id/update_pseudo"
                 android:layout_width="350dp"
@@ -39,17 +45,17 @@
                 android:padding="8dp"
                 android:textColor="@color/grey" />
 
-<!--            <EditText-->
-<!--                android:id="@+id/update_email"-->
-<!--                android:layout_width="350dp"-->
-<!--                android:layout_height="60dp"-->
-<!--                android:layout_marginTop="30dp"-->
-<!--                android:background="@drawable/lavender_border"-->
-<!--                android:drawableLeft="@drawable/baseline_email_24"-->
-<!--                android:drawablePadding="8dp"-->
-<!--                android:hint="Email"-->
-<!--                android:padding="8dp"-->
-<!--                android:textColor="@color/grey" />-->
+            <!--            <EditText-->
+            <!--                android:id="@+id/update_email"-->
+            <!--                android:layout_width="350dp"-->
+            <!--                android:layout_height="60dp"-->
+            <!--                android:layout_marginTop="30dp"-->
+            <!--                android:background="@drawable/lavender_border"-->
+            <!--                android:drawableLeft="@drawable/baseline_email_24"-->
+            <!--                android:drawablePadding="8dp"-->
+            <!--                android:hint="Email"-->
+            <!--                android:padding="8dp"-->
+            <!--                android:textColor="@color/grey" />-->
 
             <EditText
                 android:id="@+id/update_password"
@@ -64,7 +70,7 @@
                 android:inputType="textPassword"
                 android:padding="8dp"
                 android:textColor="@color/grey"
-                app:passwordToggleEnabled="true"/>
+                app:passwordToggleEnabled="true" />
 
             <EditText
                 android:id="@+id/update_password_confirm"
@@ -79,7 +85,7 @@
                 android:inputType="textPassword"
                 android:padding="8dp"
                 android:textColor="@color/grey"
-                app:passwordToggleEnabled="true"/>
+                app:passwordToggleEnabled="true" />
 
             <Button
                 android:id="@+id/edit_button"
