@@ -33,57 +33,83 @@
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
-
             <EditText
-                android:id="@+id/signup_pseudo"
-                android:layout_width="350dp"
-                android:layout_height="60dp"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/lavender_border"
-                android:drawableLeft="@drawable/account"
-                android:drawablePadding="8dp"
-                android:hint="pseudo"
-                android:padding="8dp"
-                android:textColor="@color/grey" />
-
-            <EditText
-                android:id="@+id/signup_email"
-                android:layout_width="350dp"
-                android:layout_height="60dp"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/lavender_border"
-                android:drawableLeft="@drawable/baseline_email_24"
-                android:drawablePadding="8dp"
-                android:hint="Email"
-                android:padding="8dp"
-                android:textColor="@color/grey" />
-
-            <EditText
-                android:id="@+id/signup_password"
+                android:id="@+id/title"
                 android:layout_width="350dp"
                 android:layout_height="60dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/lavender_border"
-                android:drawableLeft="@drawable/baseline_lock_24"
-                android:drawableRight="@drawable/baseline_remove_red_eye_24"
                 android:drawablePadding="8dp"
-                android:hint="Password"
-                android:inputType="textPassword"
+                android:hint="Title"
                 android:padding="8dp"
                 android:textColor="@color/grey"
                 app:passwordToggleEnabled="true"/>
 
             <EditText
-                android:id="@+id/signup_confirm"
+                android:id="@+id/category"
+                android:layout_width="350dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/lavender_border"
+                android:drawablePadding="8dp"
+                android:hint="category"
+                android:padding="8dp"
+                android:textColor="@color/grey" />
+
+            <EditText
+                android:id="@+id/description"
+                android:layout_width="350dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/lavender_border"
+                android:drawablePadding="8dp"
+                android:hint="Description"
+                android:padding="8dp"
+                android:textColor="@color/grey" />
+
+
+            <EditText
+                android:id="@+id/tvInstructions"
                 android:layout_width="350dp"
                 android:layout_height="60dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/lavender_border"
-                android:drawableLeft="@drawable/baseline_password_24"
-                android:drawableRight="@drawable/baseline_remove_red_eye_24"
                 android:drawablePadding="8dp"
-                android:hint="Confirm Password"
-                android:inputType="textPassword"
+                android:hint="Instructions"
+                android:padding="8dp"
+                android:textColor="@color/grey"
+                app:passwordToggleEnabled="true"/>
+
+            <EditText
+                android:id="@+id/image"
+                android:layout_width="350dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/lavender_border"
+                android:drawablePadding="8dp"
+                android:hint="Image"
+                android:padding="8dp"
+                android:textColor="@color/grey" />
+
+            <EditText
+                android:id="@+id/calories_add"
+                android:layout_width="350dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/lavender_border"
+                android:drawablePadding="8dp"
+                android:hint="Calories"
+                android:padding="8dp"
+                android:textColor="@color/grey" />
+
+            <EditText
+                android:id="@+id/prep_time"
+                android:layout_width="350dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/lavender_border"
+                android:drawablePadding="8dp"
+                android:hint="Time  (in minutes)"
                 android:padding="8dp"
                 android:textColor="@color/grey"
                 app:passwordToggleEnabled="true"/>
@@ -96,6 +122,8 @@
                 android:text="Add My recipe"
                 android:textSize="18sp"
                 app:cornerRadius="30dp" />
+
+
 
         </LinearLayout>
 

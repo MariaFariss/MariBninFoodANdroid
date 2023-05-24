@@ -11,7 +11,7 @@ object RecipeDao {
 
     private const val TAG  = "RecipeDao"
     public const val COLLECTION  = "Recipe"
-    private lateinit var db : FirebaseFirestore
+    private var db : FirebaseFirestore = FirebaseFirestore.getInstance()
 
 
     fun getNewRecipe(collection: String, callback: (ArrayList<RecipeClass>) -> Unit) {
@@ -97,6 +97,29 @@ object RecipeDao {
 
             .addOnFailureListener { exception ->
                 Log.w(TAG, "Error getting documents.", exception)
+            }
+    }
+
+    //add recipe
+    fun addRecipe(recipe: RecipeClass, onResult: () -> Unit) {
+        val data = hashMapOf(
+            "dataImage" to recipe.dataImage,
+            "dataTitle" to recipe.dataTitle,
+            "dataDesc" to recipe.dataDesc,
+            "newRecipes" to recipe.newRecipes,
+            "category" to db.document(recipe.category),
+            "instruction" to recipe.instruction,
+            "calories" to recipe.calories,
+            "prep" to recipe.prep
+        )
+        db.collection(COLLECTION)
+            .document()
+            .set(data)
+            .addOnSuccessListener {
+                onResult()
+            }
+            .addOnFailureListener {
+                Log.d("SaveRecipe", "failure ")
             }
     }
 }
