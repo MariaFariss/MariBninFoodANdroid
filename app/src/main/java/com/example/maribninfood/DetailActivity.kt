@@ -70,6 +70,13 @@ class DetailActivity : AppCompatActivity() {
                 startActivity(intent)
                 Log.d("Detail Activity", "back to category detail")
             }
+            //pour les calories
+            val caloriesButton: TextView = findViewById(R.id.cal)
+            caloriesButton.text = ref.calories + " cal"
+            //pour le temps de preparation
+            val prepButton: TextView = findViewById(R.id.tvTime)
+            prepButton.text = ref.prep + " min"
+
         }
 
     }

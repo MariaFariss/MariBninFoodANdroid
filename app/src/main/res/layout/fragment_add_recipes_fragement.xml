@@ -29,7 +29,7 @@
                 android:fontFamily="@font/gilroy_bold"
                 android:gravity="center"
                 android:scaleType="centerCrop"
-                android:text="Add new recipes like a chef 👨‍🍳"
+                android:text="Add new recipes like a chef 👨‍🍳 😉"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="30sp" />

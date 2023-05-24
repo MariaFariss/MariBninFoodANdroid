@@ -45,6 +45,10 @@ class ShowCategoryRecipeAdapter(private val dataList: ArrayList<RecipeClass>,pri
         holder.deleteButton?.setOnClickListener{
             onDeleteClick?.invoke(currentItem)
         }
+        //pour les calories
+        holder.caloriesButton.text = currentItem.calories + " cal"
+        //pour le temps de preparation
+        holder.prepButton.text = currentItem.prep + " min"
 //        //back arrow button
 //        holder.backArrowButton.setOnClickListener{
 //            onBackArrowClick?.invoke(currentItem)
@@ -61,6 +65,8 @@ class ShowCategoryRecipeAdapter(private val dataList: ArrayList<RecipeClass>,pri
         val rvTitle: TextView = itemView.findViewById(R.id.tv_dish_name)
         val rvBoutton: TextView = itemView.findViewById(R.id.btn_more_info)
         val deleteButton: TextView? = itemView.findViewById(R.id.btn_delete)
+        val caloriesButton: TextView = itemView.findViewById(R.id.cal)
+        val prepButton: TextView = itemView.findViewById(R.id.tvTime)
 //        val backArrowButton: ImageView = itemView.findViewById(R.id.arrowBack)
     }
 }
