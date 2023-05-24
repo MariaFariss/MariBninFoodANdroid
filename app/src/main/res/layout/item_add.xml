@@ -55,7 +55,7 @@
 
 
                     <TextView
-                        android:id="@+id/tv_pseudo"
+                        android:id="@+id/tv_pseudoEdit"
                         android:text="pseudo here"
                         android:textSize="13sp"
                         android:textColor="#ED5E5E5E"

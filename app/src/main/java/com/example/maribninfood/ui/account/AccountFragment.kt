@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.maribninfood.LoginActivity
 import com.example.maribninfood.MainActivity
 import com.example.maribninfood.R
+import com.example.maribninfood.dao.UserInfoDao
 import com.example.maribninfood.editUserFragment
 import com.google.firebase.auth.FirebaseAuth
 
@@ -30,6 +31,7 @@ class AccountFragment : Fragment() {
     private lateinit var myRecipesLayout: RecyclerView
     private lateinit var mail: TextView
     private lateinit var pseudo: TextView
+    private lateinit var pseudoAdd: TextView
     private lateinit var editButton: ImageView
 
 
@@ -69,18 +71,23 @@ class AccountFragment : Fragment() {
         // personal info
         mail = view.findViewById(R.id.tv_mail)
         pseudo = view.findViewById(R.id.tv_pseudo)
+        pseudoAdd = view.findViewById(R.id.tv_pseudoEdit)
         editButton = view.findViewById(R.id.edit)
 
         // get the user info
         val user = FirebaseAuth.getInstance().currentUser
         user?.let {
-            // Name, email address, and profile photo Url
-            val email = user.email
-            val name = user.displayName
-//            val photoUrl = user.photoUrl
+            val userInfo = UserInfoDao.getCurrentUser()
+            val email = userInfo?.mail
+            val name = userInfo?.pseudo
+            Log.d("AccountFragment", "email: $email")
+            Log.d("AccountFragment", "name: $name")
             mail.text = email
             pseudo.text = name
+            pseudoAdd.text = name
         }
+
+        // edit the user info when the user click on the button
         editButton.setOnClickListener {
             findNavController().navigate(R.id.navigation_editPofile)
         }
