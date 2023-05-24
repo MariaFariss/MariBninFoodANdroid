@@ -40,4 +40,13 @@ object UserInfoDao {
             }
         }
     }
+
+    fun updateEmail(email: String, onResult: () -> Unit) {
+        val user = auth.currentUser
+        user?.updateEmail(email)?.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                onResult()
+            }
+        }
+    }
 }
