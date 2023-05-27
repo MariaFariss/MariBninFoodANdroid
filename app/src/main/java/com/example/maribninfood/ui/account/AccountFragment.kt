@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
@@ -17,6 +18,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.maribninfood.DetailActivity
 import com.example.maribninfood.LoginActivity
 import com.example.maribninfood.MainActivity
 import com.example.maribninfood.R
@@ -39,9 +41,6 @@ class AccountFragment : Fragment() {
     private lateinit var editButton: ImageView
     private var listRecipe = ArrayList<RecipeClass>()
     private lateinit var userRecipeAdapter: ShowCategoryRecipeAdapter
-
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -108,6 +107,12 @@ class AccountFragment : Fragment() {
                     if (listRecipe.size == listRecipes.size){
                         userRecipeAdapter = ShowCategoryRecipeAdapter(listRecipe, R.layout.category_detail_card)
                         userRecipesRecyclerView.adapter = userRecipeAdapter
+                        // go to the detail activity when the user click on the button
+                        userRecipeAdapter.onItemClick = {
+                            val intent = Intent(context, DetailActivity::class.java)
+                            intent.putExtra("android", it.id)
+                            startActivity(intent)
+                        }
                     }
                 }
             }
