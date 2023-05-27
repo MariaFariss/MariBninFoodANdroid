@@ -30,7 +30,6 @@ class addRecipesFragement : Fragment() {
         fun newInstance() = addRecipesFragement()
     }
 
-    private lateinit var viewModel: AddRecipesFragementViewModel
     // Create a HashMap to map the category names to Firestore document IDs
     private val categoryMap = hashMapOf(
         "starter" to "Categories/D0wQQrfNF4h5BfFbKMqZ",
@@ -104,11 +103,6 @@ class addRecipesFragement : Fragment() {
         return view
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(AddRecipesFragementViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
 
     override fun onResume() {
         super.onResume()
