@@ -98,7 +98,7 @@ class addRecipesFragement : Fragment() {
                 time
             )
             RecipeDao.addRecipe(newRecipe) {
-                findNavController().navigate(R.id.navigation_editPofile)
+                findNavController().navigate(R.id.navigation_account)
             }
         }
         return view
