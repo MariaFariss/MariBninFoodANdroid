@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.Spinner
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.example.maribninfood.R
@@ -18,8 +20,8 @@ class addRecipesFragement : Fragment() {
     companion object {
         private lateinit var title : TextView
         private lateinit var description : TextView
-        private lateinit var ingredients : TextView
-        private lateinit var category: TextView
+        private lateinit var instructions : TextView
+        private lateinit var category: Spinner
         private lateinit var image : TextView
         private lateinit var calories : TextView
         private lateinit var time : TextView
@@ -28,6 +30,13 @@ class addRecipesFragement : Fragment() {
     }
 
     private lateinit var viewModel: AddRecipesFragementViewModel
+    // Create a HashMap to map the category names to Firestore document IDs
+    private val categoryMap = hashMapOf(
+        "starter" to "Categories/D0wQQrfNF4h5BfFbKMqZ",
+        "dessert" to "Categories/kJWSyOUsHa7lvv7u7WuA",
+        "drinks" to "Categories/2EdCSS6s8PqEuwKznEZI",
+        "main course" to "Categories/Ozgsfm4aP3jFUB0TD0T6"
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,24 +45,47 @@ class addRecipesFragement : Fragment() {
         val view= inflater.inflate(R.layout.fragment_add_recipes_fragement, container, false)
         title = view.findViewById(R.id.title)
         description = view.findViewById(R.id.description)
-        ingredients = view.findViewById(R.id.category)
-        category = view.findViewById(R.id.category)
+        instructions = view.findViewById(R.id.tvInstructions)
+        category = view.findViewById(R.id.categorySpinner)
         image = view.findViewById(R.id.image)
         calories = view.findViewById(R.id.calories_add)
         time = view.findViewById(R.id.prep_time)
         addButton = view.findViewById(R.id.add_recipes_button)
 
+        //spinner category
+        val categorySpinner: Spinner = view.findViewById(R.id.categorySpinner)
+        val dropDownList = arrayOf("starter", "dessert", "drinks", "main course")
+        val adapter = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_spinner_item,
+            dropDownList
+        )
+        adapter?.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        categorySpinner.adapter = adapter
+
+
         addButton.setOnClickListener {
             val title = title.text.toString()
             val description = description.text.toString()
-            val ingredients = ingredients.text.toString()
-            val category = category.text.toString()
+            val ingredients = instructions.text.toString()
+            val category = category.selectedItem.toString()
             val image = image.text.toString()
             val calories = calories.text.toString()
             val time = time.text.toString()
             val new = true
-//            class RecipeClass (var id: String,var dataImage:String, var dataTitle:String, var dataDesc: String, var newRecipes : Boolean, var category : String, var instruction : String, var calories:String, var prep : String):
-            val newRecipe = RecipeClass("1",image,title,description,new,category,ingredients,calories,time)
+            // Get the corresponding Firestore document ID from the categoryMap
+            val categoryDocumentId = categoryMap[category] ?: ""
+            val newRecipe = RecipeClass(
+                "1",
+                image,
+                title,
+                description,
+                new,
+                categoryDocumentId,
+                ingredients,
+                calories,
+                time
+            )
             RecipeDao.addRecipe(newRecipe){
                 findNavController().navigate(R.id.navigation_editPofile)
 

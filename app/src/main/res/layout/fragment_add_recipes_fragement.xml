@@ -45,52 +45,25 @@
                 android:textColor="@color/grey"
                 app:passwordToggleEnabled="true"/>
 
-            <EditText
-                android:id="@+id/category"
+            <LinearLayout
+                android:id="@+id/categorySpinnerContainer"
                 android:layout_width="350dp"
                 android:layout_height="60dp"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/lavender_border"
-                android:drawablePadding="8dp"
-                android:hint="category"
-                android:padding="8dp"
-                android:textColor="@color/grey" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
-            <EditText
-                android:id="@+id/description"
-                android:layout_width="350dp"
-                android:layout_height="60dp"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/lavender_border"
-                android:drawablePadding="8dp"
-                android:hint="Description"
-                android:padding="8dp"
-                android:textColor="@color/grey" />
+                <Spinner
+                    android:id="@+id/categorySpinner"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:padding="8dp"
+                    android:hint="category"
+                    android:textColor="@color/grey" />
 
-
-            <EditText
-                android:id="@+id/tvInstructions"
-                android:layout_width="350dp"
-                android:layout_height="60dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/lavender_border"
-                android:drawablePadding="8dp"
-                android:hint="Instructions"
-                android:padding="8dp"
-                android:textColor="@color/grey"
-                app:passwordToggleEnabled="true"/>
-
-            <EditText
-                android:id="@+id/image"
-                android:layout_width="350dp"
-                android:layout_height="60dp"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/lavender_border"
-                android:drawablePadding="8dp"
-                android:hint="Image"
-                android:padding="8dp"
-                android:textColor="@color/grey" />
-
+            </LinearLayout>
             <EditText
                 android:id="@+id/calories_add"
                 android:layout_width="350dp"
@@ -98,7 +71,7 @@
                 android:layout_marginTop="30dp"
                 android:background="@drawable/lavender_border"
                 android:drawablePadding="8dp"
-                android:hint="Calories"
+                android:hint="Calories (in cal)"
                 android:padding="8dp"
                 android:textColor="@color/grey" />
 
@@ -114,11 +87,50 @@
                 android:textColor="@color/grey"
                 app:passwordToggleEnabled="true"/>
 
+
+            <EditText
+                android:id="@+id/description"
+                android:layout_width="350dp"
+                android:layout_height="300dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/lavender_border"
+                android:drawablePadding="8dp"
+                android:hint="Description"
+                android:padding="8dp"
+                android:gravity="top"
+                android:textColor="@color/grey" />
+
+            <EditText
+                android:id="@+id/tvInstructions"
+                android:layout_width="350dp"
+                android:layout_height="300dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/lavender_border"
+                android:drawablePadding="8dp"
+                android:hint="Instructions"
+                android:padding="8dp"
+                android:textColor="@color/grey"
+                android:gravity="top"
+                app:passwordToggleEnabled="true"/>
+
+            <EditText
+                android:id="@+id/image"
+                android:layout_width="350dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/lavender_border"
+                android:drawablePadding="8dp"
+                android:hint="Image"
+                android:padding="8dp"
+                android:textColor="@color/grey" />
+
+
             <Button
                 android:id="@+id/add_recipes_button"
                 android:layout_width="350dp"
                 android:layout_height="70dp"
                 android:layout_marginTop="30dp"
+                android:layout_marginBottom="50dp"
                 android:text="Add My recipe"
                 android:textSize="18sp"
                 app:cornerRadius="30dp" />
