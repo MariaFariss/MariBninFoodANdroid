@@ -15,12 +15,16 @@ import android.widget.ScrollView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.maribninfood.LoginActivity
 import com.example.maribninfood.MainActivity
 import com.example.maribninfood.R
+import com.example.maribninfood.adaptor.ShowCategoryRecipeAdapter
+import com.example.maribninfood.dao.RecipeDao
 import com.example.maribninfood.dao.UserInfoDao
 import com.example.maribninfood.editUserFragment
+import com.example.maribninfood.model.RecipeClass
 import com.google.firebase.auth.FirebaseAuth
 
 class AccountFragment : Fragment() {
@@ -33,6 +37,9 @@ class AccountFragment : Fragment() {
     private lateinit var pseudo: TextView
     private lateinit var pseudoAdd: TextView
     private lateinit var editButton: ImageView
+    private var listRecipe = ArrayList<RecipeClass>()
+    private lateinit var userRecipeAdapter: ShowCategoryRecipeAdapter
+
 
 
 
@@ -50,22 +57,23 @@ class AccountFragment : Fragment() {
         personalInfoLayout = view.findViewById(R.id.pesonelInfoLayout)
         myRecipesLayout = view.findViewById(R.id.myrecipes_recyclerview)
 
+        personalInfoLayout.visibility = View.VISIBLE
+        myRecipesLayout.visibility = View.GONE
+
 
         personalInfoButton.setOnClickListener {
-            Log.d("AccountFragment", "personalInfoButton clicked")
             personalInfoLayout.visibility = View.VISIBLE
             myRecipesLayout.visibility = View.GONE
-            personalInfoButton.setTextColor(resources.getColor(R.color.white))
-            myRecipesButton.setTextColor(resources.getColor(R.color.grey))
+            personalInfoButton.setTextColor(resources.getColor(R.color.black))
+            myRecipesButton.setTextColor(resources.getColor(R.color.lightGrey))
 
         }
 
         myRecipesButton.setOnClickListener {
-            Log.d("AccountFragment", "myRecipesButton clicked")
             personalInfoLayout.visibility = View.GONE
             myRecipesLayout.visibility = View.VISIBLE
-            personalInfoButton.setTextColor(resources.getColor(R.color.grey))
-            myRecipesButton.setTextColor(resources.getColor(R.color.white))
+            personalInfoButton.setTextColor(resources.getColor(R.color.lightGrey))
+            myRecipesButton.setTextColor(resources.getColor(R.color.black))
 
         }
         // personal info
@@ -80,8 +88,6 @@ class AccountFragment : Fragment() {
             val userInfo = UserInfoDao.getCurrentUser()
             val email = userInfo?.mail
             val name = userInfo?.pseudo
-            Log.d("AccountFragment", "email: $email")
-            Log.d("AccountFragment", "name: $name")
             mail.text = email
             pseudo.text = name
             pseudoAdd.text = name
@@ -91,7 +97,23 @@ class AccountFragment : Fragment() {
         editButton.setOnClickListener {
             findNavController().navigate(R.id.navigation_editPofile)
         }
+        //show the user recipes
+        val userRecipesRecyclerView = view.findViewById<RecyclerView>(R.id.myrecipes_recyclerview)
+        userRecipesRecyclerView.layoutManager = LinearLayoutManager(context)
+        val mail = user?.email
+        RecipeDao.getRecipeByUser(mail){listRecipes ->
+            for(recipe in listRecipes){
+                RecipeDao.getRecipeByRef(recipe.refRecipe){recipe ->
+                    listRecipe.add(recipe)
+                    if (listRecipe.size == listRecipes.size){
+                        userRecipeAdapter = ShowCategoryRecipeAdapter(listRecipe, R.layout.category_detail_card)
+                        userRecipesRecyclerView.adapter = userRecipeAdapter
+                    }
+                }
+            }
+        }
 
+        // logout
         val logoutButton: ImageView = view.findViewById(R.id.logoutButton)
         val goBack: ImageView = view.findViewById(R.id.arrowBack)
         logoutButton.setOnClickListener {

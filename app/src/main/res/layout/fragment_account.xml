@@ -100,9 +100,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         tools:itemCount="1"
-        tools:listitem="@layout/category_detail_card"  />
+        tools:listitem="@layout/category_detail_card" />
 
-<!--    <TextView-->
+    <!--    <TextView-->
 <!--        android:id="@+id/textView"-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="wrap_content"-->
