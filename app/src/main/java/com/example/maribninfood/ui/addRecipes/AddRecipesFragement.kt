@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
 import android.widget.TextView
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.maribninfood.R
 import com.example.maribninfood.dao.RecipeDao
@@ -73,8 +74,18 @@ class addRecipesFragement : Fragment() {
             val calories = calories.text.toString()
             val time = time.text.toString()
             val new = true
+
+            // Validate the fields
+            if (title.isBlank() || description.isBlank() || ingredients.isBlank() || image.isBlank() ||
+                calories.isBlank() || time.isBlank()) {
+                // Show an error message or handle the invalid fields
+                Toast.makeText(requireContext(), "Please fill in all the required fields", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             // Get the corresponding Firestore document ID from the categoryMap
             val categoryDocumentId = categoryMap[category] ?: ""
+
             val newRecipe = RecipeClass(
                 "1",
                 image,
@@ -86,9 +97,8 @@ class addRecipesFragement : Fragment() {
                 calories,
                 time
             )
-            RecipeDao.addRecipe(newRecipe){
+            RecipeDao.addRecipe(newRecipe) {
                 findNavController().navigate(R.id.navigation_editPofile)
-
             }
         }
         return view
@@ -98,6 +108,17 @@ class addRecipesFragement : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(AddRecipesFragementViewModel::class.java)
         // TODO: Use the ViewModel
+    }
+
+    override fun onResume() {
+        super.onResume()
+        title.text = null
+        description.text = null
+        instructions.text = null
+        image.text = null
+        calories.text = null
+        time.text = null
+        category.setSelection(0)
     }
 
 }

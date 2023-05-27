@@ -71,8 +71,9 @@
                 android:layout_marginTop="30dp"
                 android:background="@drawable/lavender_border"
                 android:drawablePadding="8dp"
-                android:hint="Calories (in cal)"
+                android:hint="Calories"
                 android:padding="8dp"
+                android:inputType="numberDecimal"
                 android:textColor="@color/grey" />
 
             <EditText
@@ -84,6 +85,7 @@
                 android:drawablePadding="8dp"
                 android:hint="Time  (in minutes)"
                 android:padding="8dp"
+                android:inputType="numberDecimal"
                 android:textColor="@color/grey"
                 app:passwordToggleEnabled="true"/>
 
