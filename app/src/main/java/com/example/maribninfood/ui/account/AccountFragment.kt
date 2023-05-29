@@ -39,6 +39,7 @@ class AccountFragment : Fragment() {
     private lateinit var pseudo: TextView
     private lateinit var pseudoAdd: TextView
     private lateinit var editButton: ImageView
+    private lateinit var emptyTextView: TextView
     private var listRecipe = ArrayList<RecipeClass>()
     private lateinit var userRecipeAdapter: ShowCategoryRecipeAdapter
 
@@ -49,38 +50,11 @@ class AccountFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_account, container, false)
 
-        //change the ui when the user click on the button
-        personalInfoButton = view.findViewById(R.id.tv_personal_info_button)
-        myRecipesButton = view.findViewById(R.id.tv_my_recipes_button)
-
-        personalInfoLayout = view.findViewById(R.id.pesonelInfoLayout)
-        myRecipesLayout = view.findViewById(R.id.myrecipes_recyclerview)
-
-        personalInfoLayout.visibility = View.VISIBLE
-        myRecipesLayout.visibility = View.GONE
-
-
-        personalInfoButton.setOnClickListener {
-            personalInfoLayout.visibility = View.VISIBLE
-            myRecipesLayout.visibility = View.GONE
-            personalInfoButton.setTextColor(resources.getColor(R.color.black))
-            myRecipesButton.setTextColor(resources.getColor(R.color.lightGrey))
-
-        }
-
-        myRecipesButton.setOnClickListener {
-            personalInfoLayout.visibility = View.GONE
-            myRecipesLayout.visibility = View.VISIBLE
-            personalInfoButton.setTextColor(resources.getColor(R.color.lightGrey))
-            myRecipesButton.setTextColor(resources.getColor(R.color.black))
-
-        }
         // personal info
         mail = view.findViewById(R.id.tv_mail)
         pseudo = view.findViewById(R.id.tv_pseudo)
         pseudoAdd = view.findViewById(R.id.tv_pseudoEdit)
         editButton = view.findViewById(R.id.edit)
-
         // get the user info
         val user = FirebaseAuth.getInstance().currentUser
         user?.let {
@@ -96,27 +70,63 @@ class AccountFragment : Fragment() {
         editButton.setOnClickListener {
             findNavController().navigate(R.id.navigation_editPofile)
         }
-        //show the user recipes
-        val userRecipesRecyclerView = view.findViewById<RecyclerView>(R.id.myrecipes_recyclerview)
-        userRecipesRecyclerView.layoutManager = LinearLayoutManager(context)
-        val mail = user?.email
-        RecipeDao.getRecipeByUser(mail){listRecipes ->
-            for(recipe in listRecipes){
-                RecipeDao.getRecipeByRef(recipe.refRecipe){recipe ->
-                    listRecipe.add(recipe)
-                    if (listRecipe.size == listRecipes.size){
-                        userRecipeAdapter = ShowCategoryRecipeAdapter(listRecipe, R.layout.category_detail_card)
-                        userRecipesRecyclerView.adapter = userRecipeAdapter
-                        // go to the detail activity when the user click on the button
-                        userRecipeAdapter.onItemClick = {
-                            val intent = Intent(context, DetailActivity::class.java)
-                            intent.putExtra("android", it.id)
-                            startActivity(intent)
+
+        //change the ui when the user click on the button
+        personalInfoButton = view.findViewById(R.id.tv_personal_info_button)
+        myRecipesButton = view.findViewById(R.id.tv_my_recipes_button)
+        emptyTextView = view.findViewById(R.id.empty_text_view)
+
+        personalInfoLayout = view.findViewById(R.id.pesonelInfoLayout)
+        myRecipesLayout = view.findViewById(R.id.myrecipes_recyclerview)
+
+        personalInfoLayout.visibility = View.VISIBLE
+        myRecipesLayout.visibility = View.GONE
+
+        personalInfoButton.setOnClickListener {
+            personalInfoLayout.visibility = View.VISIBLE
+            myRecipesLayout.visibility = View.GONE
+            emptyTextView.visibility = View.GONE
+            personalInfoButton.setTextColor(resources.getColor(R.color.black))
+            myRecipesButton.setTextColor(resources.getColor(R.color.lightGrey))
+
+        }
+
+        myRecipesButton.setOnClickListener {
+            personalInfoLayout.visibility = View.GONE
+            myRecipesLayout.visibility = View.VISIBLE
+            personalInfoButton.setTextColor(resources.getColor(R.color.lightGrey))
+            myRecipesButton.setTextColor(resources.getColor(R.color.black))
+
+            //show the user recipes
+            val userRecipesRecyclerView = view.findViewById<RecyclerView>(R.id.myrecipes_recyclerview)
+            userRecipesRecyclerView.layoutManager = LinearLayoutManager(context)
+            val mail = user?.email
+            RecipeDao.getRecipeByUser(mail){listRecipes ->
+                for(recipe in listRecipes){
+                    RecipeDao.getRecipeByRef(recipe.refRecipe){recipe ->
+                        listRecipe.add(recipe)
+                        if (listRecipe.size == listRecipes.size){
+                            userRecipeAdapter = ShowCategoryRecipeAdapter(listRecipe, R.layout.category_detail_card)
+                            userRecipesRecyclerView.adapter = userRecipeAdapter
+                            updateUI(userRecipesRecyclerView, view.findViewById(R.id.empty_text_view))
+                            // go to the detail activity when the user click on the button
+                            userRecipeAdapter.onItemClick = {
+                                val intent = Intent(context, DetailActivity::class.java)
+                                intent.putExtra("android", it.id)
+                                startActivity(intent)
+                            }
                         }
                     }
                 }
+                if (listRecipes.isEmpty()) {
+                    userRecipeAdapter = ShowCategoryRecipeAdapter(listRecipe, R.layout.bookmark_card)
+                    userRecipesRecyclerView.adapter = userRecipeAdapter
+                    updateUI(userRecipesRecyclerView, view.findViewById(R.id.empty_text_view))
+                }
             }
+
         }
+
 
         // logout
         val logoutButton: ImageView = view.findViewById(R.id.logoutButton)
@@ -141,5 +151,16 @@ class AccountFragment : Fragment() {
         val intent = Intent(activity, LoginActivity::class.java)
         startActivity(intent)
         activity?.finish() // Optional: Close the current activity after logout
+    }
+
+    private fun updateUI(recyclerView: RecyclerView, emptyTextView: TextView) {
+        if (recyclerView.adapter?.itemCount == 0) {
+            recyclerView.visibility = View.GONE
+            emptyTextView.visibility = View.VISIBLE
+            emptyTextView.text = "You don't have any recipes 😔 \n\n  Go add some recipes to become a chef!\uD83D\uDE00"
+        } else {
+            recyclerView.visibility = View.VISIBLE
+            emptyTextView.visibility = View.GONE
+        }
     }
 }
