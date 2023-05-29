@@ -39,24 +39,6 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "Fields cannot be empty", Toast.LENGTH_SHORT).show()
             }
         }
-//        binding.forgotPassword.setOnClickListener {
-//            val builder = AlertDialog.Builder(this)
-//            val view = layoutInflater.inflate(R.layout.dialog_forgot, null)
-//            val userEmail = view.findViewById<EditText>(R.id.editBox)
-//            builder.setView(view)
-//            val dialog = builder.create()
-//            view.findViewById<Button>(R.id.btnReset).setOnClickListener {
-//                compareEmail(userEmail)
-//                dialog.dismiss()
-//            }
-//            view.findViewById<Button>(R.id.btnCancel).setOnClickListener {
-//                dialog.dismiss()
-//            }
-//            if (dialog.window != null){
-//                dialog.window!!.setBackgroundDrawable(ColorDrawable(0))
-//            }
-//            dialog.show()
-//        }
         binding.signupRedirectText.setOnClickListener {
             val signupIntent = Intent(this, SignupActivity::class.java)
             startActivity(signupIntent)
