@@ -39,7 +39,7 @@
             android:maxLines="2"
             android:paddingStart="@dimen/_10dp"
             android:text="Dish Name"
-            android:textColor="@color/grey"
+            android:textColor="@color/lightGrey"
             android:textSize="@dimen/_15sp" />
     </LinearLayout>
 
