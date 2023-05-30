@@ -40,7 +40,7 @@ class DetailActivity : AppCompatActivity() {
 
             detailTitle.text = ref.dataTitle
             detailDesc.text = ref.dataDesc
-            detailInstruction.text = ref.instruction
+            detailInstruction.text = ref.instruction.split("STEP").joinToString("\n\n"){ "STEP$it" }
             Glide.with(App.applicationContext)
                 .load(Uri.parse(ref.dataImage))
                 .into(image)

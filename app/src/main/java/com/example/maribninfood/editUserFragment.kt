@@ -49,9 +49,7 @@ class editUserFragment : Fragment() {
             UserInfoDao.updateUsername(pseudo.text.toString()){
             Log.d("editfragemtn", "updateUsername: $it")
         }
-//        UserInfoDao.updateEmail(mail.text.toString()){
-//            Log.d("editfragemtn", "updateEmail: $it")
-//        }
+
         UserInfoDao.updatePassword(password.text.toString()){
             if(password!=null && updatedPassword!=null){
                 if(password.text.toString() == updatedPassword.text.toString()){

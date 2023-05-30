@@ -29,7 +29,6 @@ class MainCategoryAdapter(private val dataList: ArrayList<RecipeClass>): Recycle
         Glide.with(App.applicationContext)
             .load(Uri.parse(currentItem.dataImage))
             .into(holder.rvImage)
-//        holder.rvImage.setImageResource(currentItem.dataImage)
         holder.rvTitle.text = currentItem.dataTitle
         holder.itemView.setOnClickListener{
             onItemClick?.invoke(currentItem)

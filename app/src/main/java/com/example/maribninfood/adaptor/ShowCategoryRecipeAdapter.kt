@@ -49,11 +49,6 @@ class ShowCategoryRecipeAdapter(private val dataList: ArrayList<RecipeClass>,pri
         holder.caloriesButton.text = currentItem.calories + " cal"
         //pour le temps de preparation
         holder.prepButton.text = currentItem.prep + " min"
-//        //back arrow button
-//        holder.backArrowButton.setOnClickListener{
-//            onBackArrowClick?.invoke(currentItem)
-//
-//        }
 
     }
     override fun getItemCount(): Int {
@@ -67,6 +62,5 @@ class ShowCategoryRecipeAdapter(private val dataList: ArrayList<RecipeClass>,pri
         val deleteButton: TextView? = itemView.findViewById(R.id.btn_delete)
         val caloriesButton: TextView = itemView.findViewById(R.id.cal)
         val prepButton: TextView = itemView.findViewById(R.id.tvTime)
-//        val backArrowButton: ImageView = itemView.findViewById(R.id.arrowBack)
     }
 }
